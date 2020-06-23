@@ -31,7 +31,7 @@ class CameraExample(App):
 
     # Take the current frame of the video as the photo graph
     def onCameraClick(self, *args):
-        self.cameraObject.export_to_png('/kivyexamples/selfie.png')
+        self.cameraObject.export_to_png('*/PlatePhotos/img.png')
 
 
 # Start the Camera App
