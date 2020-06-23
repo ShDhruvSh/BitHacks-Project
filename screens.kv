@@ -1,7 +1,8 @@
 WindowManager:
     CameraWindow:
     InfoWindow:
-    ReportWindow
+    ReportWindow:
+    EndWindow:
 
 <CameraWindow>:
     name: "main"
@@ -50,22 +51,30 @@ WindowManager:
 
 <ReportWindow>:
     name: "third"
+    GridLayout:
+        cols: 2
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "second"
+                root.manager.transition.direction = "right"
+        Button:
+            text: "Go Forward"
+            on_release:
+                app.root.current = "fourth"
+                root.manager.transition.direction = "left"
 
-    Button:
-        text: "Go Back"
-        on_release:
-            app.root.current = "second"
-            root.manager.transition.direction = "right"
 
-
-<ReportWindow>:
+<EndWindow>:
     name: "fourth"
-
-    Label:
-        text: "Thank you for your report!"
-
-    Button:
-        text: "Submit another report"
-        on_release:
-            app.root.current = "first"
-            root.manager.transition.direction = "right"
+    GridLayout:
+        cols: 1
+        GridLayout:
+            cols: 2
+            Label:
+                text: "Thank you for your report!"
+        Button:
+            text: "Submit another report"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"

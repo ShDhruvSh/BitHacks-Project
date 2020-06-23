@@ -15,11 +15,15 @@ class CameraWindow(Screen):
 
 class InfoWindow(Screen):
     def addReport(self):
-        reportCount += 1
+        self.reportCount += 1
     pass
 
 
 class ReportWindow(Screen):
+    pass
+
+
+class EndWindow(Screen):
     pass
 
 
