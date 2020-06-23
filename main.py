@@ -4,7 +4,6 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.popup import Popup
 import time
-reportCount = 0
 
 
 class CameraWindow(Screen):
@@ -16,10 +15,18 @@ class CameraWindow(Screen):
 
 
 class InfoWindow(Screen):
-    def addReport(self):
-        self.reportCount += 1
+    '''
+    def recordData(self, plate):
+        infoFile = open('*/dictionary.json', 'r')
+        for CopPlates in infoFile:
+            if(CopPlates == plate):
+                return "cop-id", "name", "official-infractions", "reported-infractions"
+            else:
+                infoFile = open('*/dictionary.json', 'a')
+                infoFile.truncate(2)
+                infoFile.write();
+    '''
     pass
-
 
 class ReportWindow(Screen):
     def submitReport(self):
