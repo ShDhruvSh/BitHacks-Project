@@ -53,15 +53,30 @@ WindowManager:
     name: "third"
 
     FloatLayout:
+        TextInput:
+            id: report
+            text: "Type out cop's infraction here"
+            foreground_color: (0, 0, 0, 0.4)
+            on_touch_down:
+                root.clearText()
+            multiline: True
+            size_hint: (1.0, 0.8)
+            pos_hint: {'x': 0, 'y': 0.2}
+
         Button:
             text: "Review Cop Information"
+            size_hint: (0.5, 0.2)
+            pos_hint: {'x': 0, 'y': 0}
             on_release:
                 app.root.current = "second"
                 root.manager.transition.direction = "right"
 
         Button:
             text: "Submit Report"
+            size_hint: (0.5, 0.2)
+            pos_hint: {'x': 0.5, 'y': 0}
             on_release:
+                root.submitReport()
                 app.root.current = "fourth"
                 root.manager.transition.direction = "left"
 

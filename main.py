@@ -22,6 +22,15 @@ class InfoWindow(Screen):
 
 
 class ReportWindow(Screen):
+    def submitReport(self):
+        report = self.ids['report']
+        report.text = "Type out cop's infraction here"
+        report.foreground_color = (0, 0, 0, 0.4)
+
+    def clearText(self):
+        report = self.ids['report']
+        report.text = ""
+        report.foreground_color = (0, 0, 0, 1)
     pass
 
 
