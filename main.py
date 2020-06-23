@@ -1,3 +1,4 @@
+import time
 from kivy.app import App
 from kivy.uix.camera import Camera
 from kivy.uix.boxlayout import BoxLayout
@@ -31,7 +32,8 @@ class CameraExample(App):
 
     # Take the current frame of the video as the photo graph
     def onCameraClick(self, *args):
-        self.cameraObject.export_to_png('*/PlatePhotos/img.png')
+        timestr = time.strftime("%Y%m%d_%H%M%S")
+        self.cameraObject.export_to_png("PlatePhotos/IMG_{}.png".format(timestr))
 
 
 # Start the Camera App
