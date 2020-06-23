@@ -1,13 +1,58 @@
-<PlateCamera>:
-    orientation: 'vertical'
-    Camera:
-        id: camera
-        #resolution: (300, 300)
-        play: False
+WindowManager:
+    CameraWindow:
+    InfoWindow:
+    ReportWindow
+
+<CameraWindow>:
+    name: "main"
+
+    GridLayout:
+        cols:1
+
+        GridLayout:
+            cols: 2
+
+            Camera:
+                id: camera
+                #resolution: (300, 300)
+                play: False
+
+            Button:
+                text: 'Take Photo'
+                on_press: root.onCameraClick()
+
+        Button:
+            text: "Submit"
+            on_release:
+                app.root.current = "second"
+                root.manager.transition.direction = "left"
+
+
+<InfoWindow>:
+    name: "second"
+
+    GridLayout:
+        cols:1
+
+        GridLayout:
+            cols: 1
+            Button:
+                text: "Go Back"
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+
+        Button:
+            text: "Go Forward"
+            on_release:
+                app.root.current = "third"
+                root.manager.transition.direction = "left"
+
+<ReportWindow>:
+    name: "third"
+
     Button:
-        text: 'Take Photo'
-        size_hint: (0.5, 0.2)
-        pos: (10, 0.75)
-        on_press: root.onCameraClick()
-
-
+        text: "Go Back"
+        on_release:
+            app.root.current = "second"
+            root.manager.transition.direction = "right"

@@ -1,26 +1,36 @@
-import time
 from kivy.app import App
-from kivy.uix.camera import Camera
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
 from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
+import time
 
-kv = Builder.load_file("screens.kv")
 
-class PlateCamera(BoxLayout):
-    # Take the current frame of the video as the photo graph
+class CameraWindow(Screen):
     def onCameraClick(self, *args):
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
         camera.export_to_png("PlatePhotos/IMG_{}.png".format(timestr))
+    pass
 
-class CameraExample(App):
 
+class InfoWindow(Screen):
+    pass
+
+
+class ReportWindow(Screen):
+    pass
+
+
+class WindowManager(ScreenManager):
+    pass
+
+
+kv = Builder.load_file("screens.kv")
+
+
+class CopReporter(App):
     def build(self):
-        # return the root widget
-        return PlateCamera()
+        return kv
 
 
-# Start the Camera App
-if __name__ == '__main__':
-    CameraExample().run()
+if __name__ == "__main__":
+    CopReporter().run()
