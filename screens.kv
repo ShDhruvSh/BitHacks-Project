@@ -38,7 +38,7 @@ WindowManager:
         GridLayout:
             cols: 1
             Button:
-                text: "Go Back"
+                text: "Take Another Photo"
                 on_release:
                     app.root.current = "main"
                     root.manager.transition.direction = "right"
@@ -51,15 +51,17 @@ WindowManager:
 
 <ReportWindow>:
     name: "third"
+
     GridLayout:
         cols: 2
         Button:
-            text: "Go Back"
+            text: "Review Cop Information"
             on_release:
                 app.root.current = "second"
                 root.manager.transition.direction = "right"
+
         Button:
-            text: "Go Forward"
+            text: "Submit Report"
             on_release:
                 app.root.current = "fourth"
                 root.manager.transition.direction = "left"
@@ -67,12 +69,15 @@ WindowManager:
 
 <EndWindow>:
     name: "fourth"
+
     GridLayout:
         cols: 1
+
         GridLayout:
             cols: 2
             Label:
                 text: "Thank you for your report!"
+
         Button:
             text: "Submit another report"
             on_release:
