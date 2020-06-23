@@ -1,6 +1,8 @@
 from kivy.app import App
 from kivy.lang import Builder
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.popup import Popup
 import time
 reportCount = 0
 
@@ -38,8 +40,6 @@ class CopReporter(App):
     def build(self):
         return kv
 
-class ThankYouScreen(ScreenManager):
-    pass
 
 if __name__ == "__main__":
     CopReporter().run()
