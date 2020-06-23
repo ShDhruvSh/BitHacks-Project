@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 import time
+reportCount = 0
 
 
 class CameraWindow(Screen):
@@ -13,6 +14,8 @@ class CameraWindow(Screen):
 
 
 class InfoWindow(Screen):
+    def addReport(self):
+        reportCount += 1
     pass
 
 
@@ -31,6 +34,8 @@ class CopReporter(App):
     def build(self):
         return kv
 
+class ThankYouScreen(ScreenManager):
+    pass
 
 if __name__ == "__main__":
     CopReporter().run()

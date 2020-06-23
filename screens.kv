@@ -43,7 +43,7 @@ WindowManager:
                     root.manager.transition.direction = "right"
 
         Button:
-            text: "Go Forward"
+            text: "Report Cop"
             on_release:
                 app.root.current = "third"
                 root.manager.transition.direction = "left"
@@ -55,4 +55,17 @@ WindowManager:
         text: "Go Back"
         on_release:
             app.root.current = "second"
+            root.manager.transition.direction = "right"
+
+
+<ReportWindow>:
+    name: "fourth"
+
+    Label:
+        text: "Thank you for your report!"
+
+    Button:
+        text: "Submit another report"
+        on_release:
+            app.root.current = "first"
             root.manager.transition.direction = "right"
