@@ -19,7 +19,8 @@ class CameraWindow(Screen):
 
 class ConfirmPhotoWindow(Screen):
     def getPhoto(self):
-        plate_image = Image(source = 'PlatePhotos/'+imageName, size_hint = (1, 0.8), pos_hint = {'x': 0, 'y': 0.2})
+        plate_image = self.ids['plate_image']
+        plate_image.source = 'PlatePhotos/'+imageName
 
     pass
 

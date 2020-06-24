@@ -12,7 +12,7 @@ WindowManager:
     Camera:
         id: camera
         resolution: (300, 300)
-        play: False
+        play: True
         size_hint: (1.0, 0.8)
         pos_hint: {'x': 0, 'y': 0.2}
 
@@ -28,6 +28,11 @@ WindowManager:
 
 <ConfirmPhotoWindow>:
     name: "confirm"
+
+    Image:
+        id: plate_image
+        size_hint: (1, 0.8)
+        pos_hint: {'x': 0, 'y': 0.2}
 
     Button:
         text: "Retake Photo"
