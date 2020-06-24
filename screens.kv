@@ -5,25 +5,37 @@ WindowManager:
     ReportWindow:
     EndWindow:
 
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<BackgroundLabel@Label+BackgroundColor>
+    background_color: 1, 1, 1, 1
+
 <CameraWindow>:
     name: "main"
 
     FloatLayout:
-    Camera:
-        id: camera
-        resolution: (2000, 2000)
-        play: True
-        size_hint: (1.0, 0.8)
-        pos_hint: {'x': 0, 'y': 0.2}
+        Camera:
+            id: camera
+            #resolution: (2000, 2000)
+            play: True
+            size_hint: (1.0, 0.8)
+            pos_hint: {'x': 0, 'y': 0.2}
 
-    Button:
-        text: 'Take Photo'
-        size_hint: (1, 0.2)
-        pos_hint: {'x': 0, 'y': 0}
-        on_press:
-            root.onCameraClick()
-            app.root.current = "confirm"
-            root.manager.transition.direction = "left"
+        Button:
+            text: 'Take Photo'
+            size_hint: (1, 0.2)
+            pos_hint: {'x': 0, 'y': 0}
+            on_press:
+                root.onCameraClick()
+                app.root.current = "confirm"
+                root.manager.transition.direction = "left"
 
 
 <ConfirmPhotoWindow>:
@@ -64,19 +76,75 @@ WindowManager:
 <InfoWindow>:
     name: "second"
 
-    GridLayout:
-        cols:1
+    FloatLayout:
+        Label:
+            text: "Name: "+"Joe" #this will be replaced with info from dictionary
+            size_hint: (1, 0.2)
+            pos_hint: {'x': 0, 'y': 0.8}
 
-        GridLayout:
-            cols: 1
-            Button:
-                text: "Take Another Photo"
-                on_release:
-                    app.root.current = "main"
-                    root.manager.transition.direction = "right"
+        BackgroundLabel:
+            text: "Badge Number: "
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.5, 0.19)
+            pos_hint: {'x': 0.1, 'y': 0.6}
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        BackgroundLabel:
+            text: "000000" #this will be replaced with info from dictionary
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.2, 0.19)
+            pos_hint: {'x': 0.7, 'y': 0.6}
+
+        BackgroundLabel:
+            text: "Official Infractions: "
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.5, 0.19)
+            pos_hint: {'x': 0.1, 'y': 0.4}
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        BackgroundLabel:
+            text: "0" #this will be replaced with info from dictionary
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.2, 0.19)
+            pos_hint: {'x': 0.7, 'y': 0.4}
+
+        BackgroundLabel:
+            text: "Reported Infractions: "
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.5, 0.19)
+            pos_hint: {'x': 0.1, 'y': 0.2}
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        BackgroundLabel:
+            text: "0" #this will be replaced with info from dictionary
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.2, 0.19)
+            pos_hint: {'x': 0.7, 'y': 0.2}
+
+        Button:
+            text: "Take Another Photo"
+            size_hint: (0.5, 0.2)
+            pos_hint: {'x': 0, 'y': 0}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
 
         Button:
             text: "Report Cop"
+            size_hint: (0.5, 0.2)
+            pos_hint: {'x': 0.5, 'y': 0}
             on_release:
                 app.root.current = "third"
                 root.manager.transition.direction = "left"
