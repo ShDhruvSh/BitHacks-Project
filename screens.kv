@@ -29,13 +29,18 @@ WindowManager:
 <ConfirmPhotoWindow>:
     name: "confirm"
 
+    Button:
+        text: "Touch to see image"
+        size_hint: (1, 0.2)
+        pos_hint: {'x': 0, 'y': 0.8}
+        on_release:
+            root.getImage()
+
     Image:
         id: plate_image
         source: ""
-        size_hint: (1, 0.8)
+        size_hint: (1, 0.6)
         pos_hint: {'x': 0, 'y': 0.2}
-        on_touch_down:
-            root.getImage()
 
     Button:
         text: "Retake Image"
@@ -44,6 +49,7 @@ WindowManager:
         on_release:
             app.root.current = "main"
             root.manager.transition.direction = "right"
+            root.replaceImage()
 
     Button:
         text: "Submit Photo"

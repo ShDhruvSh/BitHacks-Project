@@ -22,8 +22,12 @@ class ConfirmPhotoWindow(Screen):
     def getImage(self):
         plate_image = self.ids['plate_image']
         plate_image.source = imageName
-        #camera.text = lol
+
+    def replaceImage(self):
+        plate_image = self.ids['plate_image']
+        plate_image.source = ""
     pass
+
 
 
 class InfoWindow(Screen):
