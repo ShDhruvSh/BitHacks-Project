@@ -15,7 +15,7 @@ WindowManager:
             pos: self.pos
 
 <BackgroundLabel@Label+BackgroundColor>
-    background_color: 0, 0, 0, 0
+    background_color: 1, 1, 1, 1
 
 <CameraWindow>:
     name: "main"
@@ -80,7 +80,7 @@ WindowManager:
             text: "Badge Number: "
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.5, 0.2)
+            size_hint: (0.5, 0.19)
             pos_hint: {'x': 0.1, 'y': 0.6}
             halign: 'left'
             valign: 'middle'
@@ -88,12 +88,16 @@ WindowManager:
 
         BackgroundLabel:
             text: "000000" #this will be replaced with info from dictionary
-            size_hint: (0.3, 0.2)
-            pos_hint: {'x': 0.6, 'y': 0.6}
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.2, 0.19)
+            pos_hint: {'x': 0.7, 'y': 0.6}
 
         BackgroundLabel:
             text: "Official Infractions: "
-            size_hint: (0.5, 0.2)
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.5, 0.19)
             pos_hint: {'x': 0.1, 'y': 0.4}
             halign: 'left'
             valign: 'middle'
@@ -101,12 +105,16 @@ WindowManager:
 
         BackgroundLabel:
             text: "0" #this will be replaced with info from dictionary
-            size_hint: (0.3, 0.2)
-            pos_hint: {'x': 0.6, 'y': 0.4}
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.2, 0.19)
+            pos_hint: {'x': 0.7, 'y': 0.4}
 
         BackgroundLabel:
             text: "Reported Infractions: "
-            size_hint: (0.5, 0.2)
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.5, 0.19)
             pos_hint: {'x': 0.1, 'y': 0.2}
             halign: 'left'
             valign: 'middle'
@@ -114,8 +122,10 @@ WindowManager:
 
         BackgroundLabel:
             text: "0" #this will be replaced with info from dictionary
-            size_hint: (0.3, 0.2)
-            pos_hint: {'x': 0.6, 'y': 0.2}
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.2, 0.19)
+            pos_hint: {'x': 0.7, 'y': 0.2}
 
         Button:
             text: "Take Another Photo"
