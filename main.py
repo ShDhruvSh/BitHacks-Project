@@ -12,16 +12,17 @@ class CameraWindow(Screen):
     def onCameraClick(self, *args):
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
+        global imageName
         imageName = "IMG_"+timestr+".png"
         camera.export_to_png(imageName)
     pass
 
 
 class ConfirmPhotoWindow(Screen):
-    def getPhoto(self):
+    def getImage(self):
         plate_image = self.ids['plate_image']
-        plate_image.source = 'PlatePhotos/'+imageName
-
+        plate_image.source = imageName
+        #camera.text = lol
     pass
 
 
