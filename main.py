@@ -25,10 +25,18 @@ class ConfirmPhotoWindow(Screen):
 
 
 class InfoWindow(Screen):
-    def addReport(self):
-        self.reportCount += 1
+    '''
+    def recordData(self, plate):
+        infoFile = open('*/dictionary.json', 'r')
+        for CopPlates in infoFile:
+            if(CopPlates == plate):
+                return "cop-id", "name", "official-infractions", "reported-infractions"
+            else:
+                infoFile = open('*/dictionary.json', 'a')
+                infoFile.truncate(2)
+                infoFile.write();
+    '''
     pass
-
 
 class ReportWindow(Screen):
     def submitReport(self):
