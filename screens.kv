@@ -98,6 +98,7 @@ WindowManager:
             text_size: self.size
             font_size: 24
             on_press:
+                root.clearData()
                 root.getData()
 
         BackgroundLabel:
@@ -191,6 +192,7 @@ WindowManager:
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
+                root.clearData()
 
         Button:
             text: "Report Cop"

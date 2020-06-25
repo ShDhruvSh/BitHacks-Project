@@ -75,6 +75,7 @@ class ConfirmPhotoWindow(Screen):
 class InfoWindow(Screen):
     plateNumber = "00000000"
     def getData(self):
+        plateNumber = "00000000"
         nameLabel = self.ids['name-label']
         idLabel = self.ids['id-label']
         offInfracLabel = self.ids['off-infrac-label']
@@ -92,6 +93,16 @@ class InfoWindow(Screen):
             #else
                 #plateNumber + ": {\"cop-id\": 1001, \"name\": \"anotherCop\", \"official-infractions\": 0, \"reported-infractions\": 0}"
 
+    def clearData(self):
+        nameLabel = self.ids['name-label']
+        idLabel = self.ids['id-label']
+        offInfracLabel = self.ids['off-infrac-label']
+        repInfracLabel = self.ids['rep-infrac-label']
+
+        nameLabel.text = "Name: "
+        idLabel.text = ""
+        offInfracLabel.text = ""
+        repInfracLabel.text = ""
     '''
     def recordData(self, plate):
         infoFile = open('*/dictionary.json', 'r')
