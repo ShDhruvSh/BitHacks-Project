@@ -12,8 +12,7 @@ import Factory
 import time
 import json
 
-plateNumber = ""
-reportCount = 0
+#plateNumber = ""
 imageName = ""
 
 
@@ -74,6 +73,7 @@ class ConfirmPhotoWindow(Screen):
 
 
 class InfoWindow(Screen):
+    plateNumber = "00000000"
     def getData(self):
         nameLabel = self.ids['name-label']
         idLabel = self.ids['id-label']
@@ -83,14 +83,14 @@ class InfoWindow(Screen):
         with open("CopDictionary.json", ) as read_file:
             data = json.load(read_file)
 
-        global plateNumber
-        plateNumber = "00000000"
         for PlateNums in data:
             if PlateNums == plateNumber:
                 nameLabel.text = "Name: " + str(data[PlateNums]["name"])
                 idLabel.text = str(data[PlateNums]["cop-id"])
                 offInfracLabel.text = str(data[PlateNums]["official-infractions"])
                 repInfracLabel.text = str(data[PlateNums]["reported-infractions"])
+            #else
+                #plateNumber + ": {\"cop-id\": 1001, \"name\": \"anotherCop\", \"official-infractions\": 0, \"reported-infractions\": 0}"
 
     '''
     def recordData(self, plate):
@@ -108,11 +108,20 @@ class InfoWindow(Screen):
 
 class ReportWindow(Screen):
     def submitReport(self):
+        obj = InfoWindow()
+        with open("CopDictionary.json", "r+") as file:
+            data = json.load(file)
+            data[obj.plateNumber]["reported-infractions"] += 1
+            #reportDictionary = {"reported-infractions": (data[obj.plateNumber]["reported-infractions"]+1)}
+            #data[obj.plateNumber].update(reportDictionary)
+
+            file.seek(0)  # go back to beginning of file
+            json.dump(data, file)
+            file.truncate()
         report = self.ids['report']
         report.text = "Type out cop's infraction here"
         report.foreground_color = (0, 0, 0, 0.4)
-        global reportCount
-        reportCount += 1
+
 
     def clearText(self):
         report = self.ids['report']
