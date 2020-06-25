@@ -98,6 +98,7 @@ WindowManager:
             text_size: self.size
             font_size: 24
             on_press:
+                root.clearData()
                 root.getData()
 
         BackgroundLabel:
@@ -191,6 +192,7 @@ WindowManager:
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
+                root.clearData()
 
         Button:
             text: "Report Cop"
@@ -259,16 +261,3 @@ WindowManager:
             pos_hint: {'x': 0.5, 'y': 0}
             on_release:
                 app.stop()
-
-<P>:
-    Label:
-        text: "Error: Please click \"Verify Image\" before submitting photo!"
-        size_hint: (1, 1)
-        pos_hint: {'x': 0, 'y': 0}
-
-    Button:
-        text: "X"
-        background_normal: ''
-        background_color: (1, 0, 0, 1)
-        size_hint: (0.1, 0.05)
-        pos_hint: {'x': 0.9, 'y': 0.95}
