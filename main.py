@@ -28,6 +28,7 @@ class CameraWindow(Screen):
 
 
 class ConfirmPhotoWindow(Screen):
+    plateNumber = "00000001"
     def getImage(self):
         plate_image = self.ids['plate_image']
         plate_image.source = imageName
@@ -35,6 +36,21 @@ class ConfirmPhotoWindow(Screen):
     def replaceImage(self):
         plate_image = self.ids['plate_image']
         plate_image.source = ""
+
+    def isNewPlate(self):
+        plateNumber = "00000001"
+        documentedPlateFlag = False
+
+        with open("CopDictionary.json", 'r+') as file:
+            data = json.load(file)
+
+        for PlateNums in data:
+            if PlateNums == plateNumber:
+                documentedPlateFlag = True
+            else:
+                continue
+
+        return not documentedPlateFlag
 
     def showPopup(self):
         plateImage = self.ids['plate_image']
@@ -62,18 +78,23 @@ class ConfirmPhotoWindow(Screen):
         popupButton.bind(on_press=popupWindow.dismiss)
 
         if len(str(plateImage.source)) > 0:
-            self.parent.current = "third"
+            if self.isNewPlate():
+                self.parent.current = "third"
+            else:
+                self.parent.current = "fourth"
             self.replaceImage()
         else:
             self.parent.current = "second"
             self.replaceImage()
             popupWindow.open()
 
+
+class EnterInfoWindow(Screen):
     pass
 
 
 class InfoWindow(Screen):
-    plateNumber = "00000001"
+    obj = ConfirmPhotoWindow()
     def getData(self):
         plateNumber = "00000000"
         nameLabel = self.ids['name-label']
@@ -84,7 +105,7 @@ class InfoWindow(Screen):
         with open("CopDictionary.json", 'r+') as file:
             data = json.load(file)
 
-        plateNumber = "00000001"
+        plateNumber = "00000000"
         documentedPlateFlag = False
         for PlateNums in data:
             if PlateNums == plateNumber:
@@ -92,25 +113,23 @@ class InfoWindow(Screen):
                 idLabel.text = str(data[PlateNums]["cop-id"])
                 offInfracLabel.text = str(data[PlateNums]["official-infractions"])
                 repInfracLabel.text = str(data[PlateNums]["reported-infractions"])
-                documentedPlateFlag = True
-
+                #documentedPlateFlag = True
+    '''
         if documentedPlateFlag == False:
             with open("CopDictionary.json", 'rb+') as file:
                 #data = json.load(file)
-                # newDictionary = {plateNumber: {"cop-id": 1001, "name": "anotherCop", "official-infractions": 0, "reported-infractions": 0}}
+                # newDictionary = {plateNumber: {"cop-id": 103, "name": "anotherCop", "official-infractions": 0, "reported-infractions": 0}}
                 # data.update(newDictionary)
                 file.seek(-1, os.SEEK_END)
                 file.truncate()
 
             with open("CopDictionary.json", 'a+') as file:
                 #data = json.load(file)
-                appendString = ", \"" + plateNumber + "\" : {\"cop-id\": 1001, \"name\": \"anotherCop\", \"official-infractions\": 0, \"reported-infractions\": 0}}"
+                appendString = ", \"" + plateNumber + "\" : {\"cop-id\": 103, \"name\": \"anotherCop\", \"official-infractions\": 0, \"reported-infractions\": 0}}"
                 file.write(appendString)
                 #data.append(appendString)
                 #json.dump(data, file)
-
-
-
+    '''
     def clearData(self):
         nameLabel = self.ids['name-label']
         idLabel = self.ids['id-label']
@@ -137,7 +156,7 @@ class InfoWindow(Screen):
 
 class ReportWindow(Screen):
     def submitReport(self):
-        obj = InfoWindow()
+        obj = ConfirmPhotoWindow()
         with open("CopDictionary.json", "r+") as file:
             data = json.load(file)
             data[obj.plateNumber]["reported-infractions"] += 1

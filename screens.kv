@@ -2,6 +2,7 @@
 WindowManager:
     CameraWindow:
     ConfirmPhotoWindow:
+    EnterInfoWindow:
     InfoWindow:
     ReportWindow:
     EndWindow:
@@ -83,9 +84,13 @@ WindowManager:
             root.showPopup()
 
 
+<EnterInfoWindow>:
+    name: "third"
+
+
 #Third window for retrieving cop info from a database
 <InfoWindow>:
-    name: "third"
+    name: "fourth"
 
     FloatLayout:
         Button:
@@ -199,13 +204,13 @@ WindowManager:
             size_hint: (0.5, 0.19)
             pos_hint: {'x': 0.5, 'y': 0}
             on_release:
-                app.root.current = "fourth"
+                app.root.current = "fifth"
                 root.manager.transition.direction = "left"
 
 
 #Fourth window for reporting a new infraction that a cop has made
 <ReportWindow>:
-    name: "fourth"
+    name: "fifth"
 
     FloatLayout:
         TextInput:
@@ -223,7 +228,7 @@ WindowManager:
             size_hint: (0.5, 0.2)
             pos_hint: {'x': 0, 'y': 0}
             on_release:
-                app.root.current = "third"
+                app.root.current = "fourth"
                 root.manager.transition.direction = "right"
 
         Button:
@@ -232,13 +237,13 @@ WindowManager:
             pos_hint: {'x': 0.5, 'y': 0}
             on_release:
                 root.submitReport()
-                app.root.current = "fifth"
+                app.root.current = "sixth"
                 root.manager.transition.direction = "left"
 
 
 #Fifth window for exiting app or taking another picture
 <EndWindow>:
-    name: "fifth"
+    name: "sixth"
 
     FloatLayout:
         Label:
