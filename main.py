@@ -8,6 +8,7 @@ import time
 import random
 import json
 
+plateNumber = ""
 reportCount = 0
 imageName = ""
 
@@ -39,12 +40,20 @@ class InfoWindow(Screen):
         idLabel = self.ids['id-label']
         offInfracLabel = self.ids['off-infrac-label']
         repInfracLabel = self.ids['rep-infrac-label']
+
         with open("CopDictionary.json",) as read_file:
             data = json.load(read_file)
-        nameLabel.text = "Name: "+str(data["00000000"]["name"])
-        idLabel.text = str(data["00000000"]["cop-id"])
-        offInfracLabel.text = str(data["00000000"]["official-infractions"])
-        repInfracLabel.text = str(data["00000000"]["reported-infractions"])
+
+        global plateNumber
+        plateNumber = "00000000"
+        for PlateNums in data:
+            if PlateNums == plateNumber:
+                nameLabel.text = "Name: " + str(data[PlateNums]["name"])
+                idLabel.text = str(data[PlateNums]["cop-id"])
+                offInfracLabel.text = str(data[PlateNums]["official-infractions"])
+                repInfracLabel.text = str(data[PlateNums]["reported-infractions"])
+
+
     '''
     def recordData(self, plate):
         infoFile = open('*/dictionary.json', 'r')
@@ -63,6 +72,8 @@ class ReportWindow(Screen):
         report = self.ids['report']
         report.text = "Type out cop's infraction here"
         report.foreground_color = (0, 0, 0, 0.4)
+        global reportCount
+        reportCount += 1
 
     def clearText(self):
         report = self.ids['report']
