@@ -5,6 +5,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition, SlideTra
 from kivy.uix.popup import Popup
 import time
 import json
+import os
 
 #plateNumber = ""
 imageName = ""
@@ -47,24 +48,42 @@ class ConfirmPhotoWindow(Screen):
 
 
 class InfoWindow(Screen):
-    plateNumber = "00000000"
+    plateNumber = "00000001"
     def getData(self):
         nameLabel = self.ids['name-label']
         idLabel = self.ids['id-label']
         offInfracLabel = self.ids['off-infrac-label']
         repInfracLabel = self.ids['rep-infrac-label']
 
-        with open("CopDictionary.json",) as read_file:
-            data = json.load(read_file)
+        with open("CopDictionary.json", 'r+') as file:
+            data = json.load(file)
 
+        plateNumber = "00000001"
+        documentedPlateFlag = False
         for PlateNums in data:
             if PlateNums == plateNumber:
                 nameLabel.text = "Name: " + str(data[PlateNums]["name"])
                 idLabel.text = str(data[PlateNums]["cop-id"])
                 offInfracLabel.text = str(data[PlateNums]["official-infractions"])
                 repInfracLabel.text = str(data[PlateNums]["reported-infractions"])
-            #else
-                #plateNumber + ": {\"cop-id\": 1001, \"name\": \"anotherCop\", \"official-infractions\": 0, \"reported-infractions\": 0}"
+                documentedPlateFlag = True
+
+        if documentedPlateFlag == False:
+            with open("CopDictionary.json", 'rb+') as file:
+                #data = json.load(file)
+                # newDictionary = {plateNumber: {"cop-id": 1001, "name": "anotherCop", "official-infractions": 0, "reported-infractions": 0}}
+                # data.update(newDictionary)
+                file.seek(-1, os.SEEK_END)
+                file.truncate()
+
+            with open("CopDictionary.json", 'a+') as file:
+                #data = json.load(file)
+                appendString = ", \"" + plateNumber + "\" : {\"cop-id\": 1001, \"name\": \"anotherCop\", \"official-infractions\": 0, \"reported-infractions\": 0}}"
+                file.write(appendString)
+                #data.append(appendString)
+                #json.dump(data, file)
+
+
 
     '''
     def recordData(self, plate):
