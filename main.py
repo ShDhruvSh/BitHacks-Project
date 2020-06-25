@@ -214,26 +214,33 @@ class ReportWindow(Screen):
 
                 dictionary = {
                     obj.plateNumber: {
-                        "Report": ""
+                        str(data[obj.plateNumber]["reported-infractions"]): report.text
                     }
                 }
 
-                for PlateNums in data:
-                    if PlateNums == obj.plateNumber:
-                        if data[PlateNums]["reported-infractions"] == 1:
-                            dictionary[obj.plateNumber]["Report"] += "" + report.text
-                        elif data[PlateNums]["reported-infractions"] > 1:
-                            dictionary[obj.plateNumber]["Report"] += ", " + report.text
-                file.seek(0)  # go back to beginning of file
-                json.dump(data, file)
-                file.truncate()
+            #    json.dump(data, file)
+            #    file.truncate()
 
             # Serializing json
-            json_object = json.dumps(dictionary, indent=4)
+            #json_object = json.dumps(dictionary, indent=4)
 
-            # Writing to sample.json
-            with open("reports.json", "w") as outfile:
-                outfile.write(json_object)
+            # Writing to reports.json
+            with open("reports.json", "r+") as file:
+                data = json.load(file)
+            #    file.write(json_object)
+                plateThere = False
+                for PlateNums in data:
+                    if (PlateNums == obj.plateNumber):
+                        plateThere = True
+
+                if not plateThere:
+                    data.update(dictionary)
+                else:
+                    data[obj.plateNumber].update(dictionary[obj.plateNumber])
+
+                file.seek(0)  # go back to beginning of file
+                file.truncate()
+                json.dump(data, file)
 
             report.text = "Type out cop's infraction here"
             report.foreground_color = (0, 0, 0, 0.4)
