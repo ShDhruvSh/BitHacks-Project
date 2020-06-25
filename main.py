@@ -118,6 +118,7 @@ class EnterInfoWindow(Screen):
         repInfracLabel.text = "0"
         nameLabel.foreground_color = (0, 0, 0, 0.4)
         nameLabel.foreground_color = (0, 0, 0, 0.4)
+
     def addNewInfo(self, copName, copID):
         obj = ConfirmPhotoWindow()
         with open("CopDictionary.json", 'rb+') as file:
@@ -198,19 +199,47 @@ class InfoWindow(Screen):
 
 class ReportWindow(Screen):
     def submitReport(self):
-        obj = ConfirmPhotoWindow()
-        with open("CopDictionary.json", "r+") as file:
-            data = json.load(file)
-            data[obj.plateNumber]["reported-infractions"] += 1
-            #reportDictionary = {"reported-infractions": (data[obj.plateNumber]["reported-infractions"]+1)}
-            #data[obj.plateNumber].update(reportDictionary)
-
-            file.seek(0)  # go back to beginning of file
-            json.dump(data, file)
-            file.truncate()
         report = self.ids['report']
-        report.text = "Type out cop's infraction here"
-        report.foreground_color = (0, 0, 0, 0.4)
+        obj = ConfirmPhotoWindow()
+        if report.text != "":
+            with open("CopDictionary.json", "r+") as file:
+                data = json.load(file)
+                data[obj.plateNumber]["reported-infractions"] += 1
+                #reportDictionary = {"reported-infractions": (data[obj.plateNumber]["reported-infractions"]+1)}
+                #data[obj.plateNumber].update(reportDictionary)
+
+                file.seek(0)  # go back to beginning of file
+                json.dump(data, file)
+                file.truncate()
+
+                dictionary = {
+                    obj.plateNumber: {
+                        "Report": ""
+                    }
+                }
+
+                for PlateNums in data:
+                    if PlateNums == obj.plateNumber:
+                        if data[PlateNums]["reported-infractions"] == 1:
+                            dictionary[obj.plateNumber]["Report"] += "" + report.text
+                        elif data[PlateNums]["reported-infractions"] > 1:
+                            dictionary[obj.plateNumber]["Report"] += ", " + report.text
+                file.seek(0)  # go back to beginning of file
+                json.dump(data, file)
+                file.truncate()
+
+            # Serializing json
+            json_object = json.dumps(dictionary, indent=4)
+
+            # Writing to sample.json
+            with open("reports.json", "w") as outfile:
+                outfile.write(json_object)
+
+            report.text = "Type out cop's infraction here"
+            report.foreground_color = (0, 0, 0, 0.4)
+
+        else:
+            self.parent.current = "fifth"
 
 
     def clearText(self):
