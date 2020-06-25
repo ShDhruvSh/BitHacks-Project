@@ -94,13 +94,13 @@ class EnterInfoWindow(Screen):
         nameLabel = self.ids['name-label']
         if nameLabel.text == "Input name here":
             nameLabel.text = ""
-        nameLabel.foreground_color = (0, 0, 0, 1)
+        nameLabel.foreground_color = (1, 1, 1, 1)
 
     def clearIdText(self):
         idLabel = self.ids['id-label']
         if idLabel.text == "Input badge number here":
             idLabel.text = ""
-        idLabel.foreground_color = (0, 0, 0, 1)
+        idLabel.foreground_color = (1, 1, 1, 1)
 
     def clearData(self):
         nameLabel = self.ids['name-label']
