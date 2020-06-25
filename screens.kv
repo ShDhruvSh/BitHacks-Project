@@ -78,12 +78,24 @@ WindowManager:
     name: "second"
 
     FloatLayout:
+        Button:
+            id: test-button
+            text: "Get Cop Info"
+            size_hint: (0.9, 0.15)
+            pos_hint: {'x': 0.05, 'y': 0.84}
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size
+            font_size: 24
+            on_press:
+                root.getData()
+
         BackgroundLabel:
             text: "Name: "+"Joe" #this will be replaced with info from dictionary
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.9, 0.19)
-            pos_hint: {'x': 0.05, 'y': 0.8}
+            size_hint: (0.9, 0.15)
+            pos_hint: {'x': 0.05, 'y': 0.68}
             halign: 'center'
             valign: 'middle'
             text_size: self.size
@@ -93,8 +105,8 @@ WindowManager:
             text: "Badge Number: "
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.525, 0.19)
-            pos_hint: {'x': 0.1, 'y': 0.6}
+            size_hint: (0.525, 0.15)
+            pos_hint: {'x': 0.1, 'y': 0.52}
             halign: 'left'
             valign: 'middle'
             text_size: self.size
@@ -102,22 +114,22 @@ WindowManager:
         BackgroundLabel:
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.05, 0.19)
-            pos_hint: {'x': 0.05, 'y': 0.6}
+            size_hint: (0.05, 0.15)
+            pos_hint: {'x': 0.05, 'y': 0.52}
 
         BackgroundLabel:
             text: "000000" #this will be replaced with info from dictionary
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.275, 0.19)
-            pos_hint: {'x': 0.675, 'y': 0.6}
+            size_hint: (0.275, 0.15)
+            pos_hint: {'x': 0.675, 'y': 0.52}
 
         BackgroundLabel:
             text: "Official Infractions: "
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.525, 0.19)
-            pos_hint: {'x': 0.1, 'y': 0.4}
+            size_hint: (0.525, 0.15)
+            pos_hint: {'x': 0.1, 'y': 0.36}
             halign: 'left'
             valign: 'middle'
             text_size: self.size
@@ -125,21 +137,21 @@ WindowManager:
         BackgroundLabel:
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.05, 0.19)
-            pos_hint: {'x': 0.05, 'y': 0.4}
+            size_hint: (0.05, 0.15)
+            pos_hint: {'x': 0.05, 'y': 0.36}
 
         BackgroundLabel:
             text: "0" #this will be replaced with info from dictionary
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.275, 0.19)
-            pos_hint: {'x': 0.675, 'y': 0.4}
+            size_hint: (0.275, 0.15)
+            pos_hint: {'x': 0.675, 'y': 0.36}
 
         BackgroundLabel:
             text: "Reported Infractions: "
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.525, 0.19)
+            size_hint: (0.525, 0.15)
             pos_hint: {'x': 0.1, 'y': 0.2}
             halign: 'left'
             valign: 'middle'
@@ -148,14 +160,14 @@ WindowManager:
         BackgroundLabel:
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.05, 0.19)
+            size_hint: (0.05, 0.15)
             pos_hint: {'x': 0.05, 'y': 0.2}
 
         BackgroundLabel:
             text: "0" #this will be replaced with info from dictionary
             background_normal: ''
             background_color: (0, 0, 1, 1)
-            size_hint: (0.275, 0.19)
+            size_hint: (0.275, 0.15)
             pos_hint: {'x': 0.675, 'y': 0.2}
 
         Button:

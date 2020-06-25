@@ -5,6 +5,9 @@ from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.popup import Popup
 import time
+import random
+import json
+
 reportCount = 0
 imageName = ""
 
@@ -31,6 +34,12 @@ class ConfirmPhotoWindow(Screen):
 
 
 class InfoWindow(Screen):
+    def getData(self):
+        testButton = self.ids['test-button']
+        with open("CopDictionary.json",) as read_file:
+            data = json.load(read_file)
+        testButton.text = str(data["00000000"]["cop-id"])
+
     '''
     def recordData(self, plate):
         infoFile = open('*/dictionary.json', 'r')
