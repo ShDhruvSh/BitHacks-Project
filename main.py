@@ -35,11 +35,16 @@ class ConfirmPhotoWindow(Screen):
 
 class InfoWindow(Screen):
     def getData(self):
-        testButton = self.ids['test-button']
+        nameLabel = self.ids['name-label']
+        idLabel = self.ids['id-label']
+        offInfracLabel = self.ids['off-infrac-label']
+        repInfracLabel = self.ids['rep-infrac-label']
         with open("CopDictionary.json",) as read_file:
             data = json.load(read_file)
-        testButton.text = str(data["00000000"]["cop-id"])
-
+        nameLabel.text = "Name: "+str(data["00000000"]["name"])
+        idLabel.text = str(data["00000000"]["cop-id"])
+        offInfracLabel.text = str(data["00000000"]["official-infractions"])
+        repInfracLabel.text = str(data["00000000"]["reported-infractions"])
     '''
     def recordData(self, plate):
         infoFile = open('*/dictionary.json', 'r')
