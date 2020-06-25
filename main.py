@@ -1,8 +1,14 @@
+import itertools
+
 from kivy.app import App
 from kivy.lang import Builder
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition, SlideTransition
 from kivy.uix.popup import Popup
+import Factory
 import time
 import json
 
@@ -10,13 +16,15 @@ plateNumber = ""
 reportCount = 0
 imageName = ""
 
+
 class CameraWindow(Screen):
     def onCameraClick(self, *args):
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
         global imageName
-        imageName = "IMG_"+timestr+".png"
+        imageName = "IMG_" + timestr + ".png"
         camera.export_to_png(imageName)
+
     pass
 
 
@@ -31,10 +39,28 @@ class ConfirmPhotoWindow(Screen):
 
     def showPopup(self):
         plateImage = self.ids['plate_image']
-        submitPhoto = self.ids['submit-photo']
-        show = P()
+        layout = FloatLayout()
+        popupLabel = Label(text="Error: Please click "
+                                "\n\"Verify Image\" before "
+                                "\nsubmitting photo!",
+                           size_hint=(0.8, 1),
+                           pos_hint={'x': 0.1, 'y': 0},
+                           halign='center',
+                           valign='middle',
+                           text_size=self.size)
+        popupButton = Button(text="X",
+                             background_normal='',
+                             background_color=(1, 0, 0, 1),
+                             size_hint=(0.1, 0.05),
+                             pos_hint={'x': 0.9, 'y': 0.95})
+        layout.add_widget(popupLabel)
+        layout.add_widget(popupButton)
 
-        popupWindow = Popup(title = "ERROR 404 YOUR COMPUTER IS CORRUPTED INSTALL ANTIVIRUS IMMEDIATELY", content = show, size_hint = (0.5, 0.5))
+        popupWindow = Popup(title="ERROR 404 YOUR COMPUTER IS CORRUPTED INSTALL ANTIVIRUS IMMEDIATELY",
+                            content=layout,
+                            size_hint=(None, None),
+                            size=(250, 250))
+        popupButton.bind(on_press=popupWindow.dismiss)
 
         if len(str(plateImage.source)) > 0:
             self.parent.current = "third"
@@ -43,8 +69,8 @@ class ConfirmPhotoWindow(Screen):
             self.parent.current = "second"
             self.replaceImage()
             popupWindow.open()
-    pass
 
+    pass
 
 
 class InfoWindow(Screen):
@@ -54,7 +80,7 @@ class InfoWindow(Screen):
         offInfracLabel = self.ids['off-infrac-label']
         repInfracLabel = self.ids['rep-infrac-label']
 
-        with open("CopDictionary.json",) as read_file:
+        with open("CopDictionary.json", ) as read_file:
             data = json.load(read_file)
 
         global plateNumber
@@ -79,6 +105,7 @@ class InfoWindow(Screen):
     '''
     pass
 
+
 class ReportWindow(Screen):
     def submitReport(self):
         report = self.ids['report']
@@ -91,6 +118,7 @@ class ReportWindow(Screen):
         report = self.ids['report']
         report.text = ""
         report.foreground_color = (0, 0, 0, 1)
+
     pass
 
 
@@ -102,7 +130,11 @@ class WindowManager(ScreenManager):
     pass
 
 
-class P(FloatLayout):
+class P(Popup):
+    def dismissPopup(self):
+        exitButton = self.ids['exit-button']
+        exitButton.on_press = lambda *args: self.popup_exit.dismiss()
+
     pass
 
 
@@ -112,7 +144,6 @@ kv = Builder.load_file("screens.kv")
 class CopReporter(App):
     def build(self):
         return kv
-
 
 
 if __name__ == "__main__":
