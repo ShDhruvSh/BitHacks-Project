@@ -97,6 +97,17 @@ WindowManager:
     FloatLayout:
 
         BackgroundLabel:
+            text: "We currently don't have data for this cop. Please fill out the following info to add this cop to our database."
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.9, 0.15)
+            pos_hint: {'x': 0.05, 'y': 0.84}
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size
+            font_size: 24
+
+        BackgroundLabel:
             text: "Name: "
             background_normal: ''
             background_color: (0, 0, 1, 1)
@@ -142,7 +153,7 @@ WindowManager:
         TextInput:
             id: id-label
             text: "Input badge number here" #this will be replaced with info from user
-            multiline: False
+            multiline: True
             background_normal: ''
             background_color: (0, 0, 1, 1)
             size_hint: (0.275, 0.15)
@@ -220,8 +231,8 @@ WindowManager:
             size_hint: (0.5, 0.19)
             pos_hint: {'x': 0.5, 'y': 0}
             on_release:
-                root.addNewInfo()
-                app.root.current = "fifth"
+                root.clearData()
+                app.root.current = "fourth"
                 root.manager.transition.direction = "left"
 
 
