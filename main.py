@@ -2,6 +2,7 @@ import itertools
 
 from kivy.app import App
 from kivy.lang import Builder
+from kivy.properties import NumericProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
@@ -12,7 +13,6 @@ import time
 import json
 import os
 
-#plateNumber = ""
 imageName = ""
 
 
@@ -29,6 +29,7 @@ class CameraWindow(Screen):
 
 class ConfirmPhotoWindow(Screen):
     plateNumber = "00000001"
+
     def getImage(self):
         plate_image = self.ids['plate_image']
         plate_image.source = imageName
@@ -67,11 +68,13 @@ class ConfirmPhotoWindow(Screen):
                              background_normal='',
                              background_color=(1, 0, 0, 1),
                              size_hint=(0.1, 0.05),
-                             pos_hint={'x': 0.9, 'y': 0.95})
+                             pos_hint={'x': 0.9, 'y': 0.9},
+                             font_size=12)
         layout.add_widget(popupLabel)
         layout.add_widget(popupButton)
 
-        popupWindow = Popup(title="ERROR 404 YOUR COMPUTER IS CORRUPTED INSTALL ANTIVIRUS IMMEDIATELY",
+        popupWindow = Popup(title="ERROR: VERIFY IMAGE",
+                            #"ERROR 404 YOUR COMPUTER IS CORRUPTED INSTALL ANTIVIRUS IMMEDIATELY",
                             content=layout,
                             size_hint=(None, None),
                             size=(250, 250))
@@ -108,8 +111,6 @@ class EnterInfoWindow(Screen):
         offInfracLabel = self.ids['off-infrac-label']
         repInfracLabel = self.ids['rep-infrac-label']
 
-
-
         self.addNewInfo(nameLabel.text, idLabel.text)
 
         nameLabel.text = "Input name here"
@@ -122,18 +123,19 @@ class EnterInfoWindow(Screen):
     def addNewInfo(self, copName, copID):
         obj = ConfirmPhotoWindow()
         with open("CopDictionary.json", 'rb+') as file:
-            #data = json.load(file)
-            #newDictionary = {plateNumber: {"cop-id": 103, "name": "anotherCop", "official-infractions": 0, "reported-infractions": 0}}
-            #data.update(newDictionary)
+            # data = json.load(file)
+            # newDictionary = {plateNumber: {"cop-id": 103, "name": "anotherCop", "official-infractions": 0, "reported-infractions": 0}}
+            # data.update(newDictionary)
             file.seek(-1, os.SEEK_END)
             file.truncate()
 
         with open("CopDictionary.json", 'a+') as file:
-            #data = json.load(file)
+            # data = json.load(file)
             appendString = ", \"" + obj.plateNumber + "\" : {\"cop-id\":" + copID + ", \"name\": \"" + copName + "\", \"official-infractions\": 0, \"reported-infractions\": 0}}"
             file.write(appendString)
-            #data.append(appendString)
-            #json.dump(data, file)
+            # data.append(appendString)
+            # json.dump(data, file)
+
     pass
 
 
@@ -148,15 +150,16 @@ class InfoWindow(Screen):
         with open("CopDictionary.json", 'r+') as file:
             data = json.load(file)
 
-        #plateNumber = "00000000"
-        #documentedPlateFlag = False
+        # plateNumber = "00000000"
+        # documentedPlateFlag = False
         for PlateNums in data:
             if PlateNums == obj.plateNumber:
                 nameLabel.text = "Name: " + str(data[PlateNums]["name"])
                 idLabel.text = str(data[PlateNums]["cop-id"])
                 offInfracLabel.text = str(data[PlateNums]["official-infractions"])
                 repInfracLabel.text = str(data[PlateNums]["reported-infractions"])
-                #documentedPlateFlag = True
+                # documentedPlateFlag = True
+
     '''
         if documentedPlateFlag == False:
             with open("CopDictionary.json", 'rb+') as file:
@@ -173,6 +176,7 @@ class InfoWindow(Screen):
                 #data.append(appendString)
                 #json.dump(data, file)
     '''
+
     def clearData(self):
         nameLabel = self.ids['name-label']
         idLabel = self.ids['id-label']
@@ -183,6 +187,7 @@ class InfoWindow(Screen):
         idLabel.text = ""
         offInfracLabel.text = ""
         repInfracLabel.text = ""
+
     '''
     def recordData(self, plate):
         infoFile = open('*/dictionary.json', 'r')
@@ -205,8 +210,8 @@ class ReportWindow(Screen):
             with open("CopDictionary.json", "r+") as file:
                 data = json.load(file)
                 data[obj.plateNumber]["reported-infractions"] += 1
-                #reportDictionary = {"reported-infractions": (data[obj.plateNumber]["reported-infractions"]+1)}
-                #data[obj.plateNumber].update(reportDictionary)
+                # reportDictionary = {"reported-infractions": (data[obj.plateNumber]["reported-infractions"]+1)}
+                # data[obj.plateNumber].update(reportDictionary)
 
                 file.seek(0)  # go back to beginning of file
                 json.dump(data, file)
@@ -240,7 +245,6 @@ class ReportWindow(Screen):
 
         else:
             self.parent.current = "fifth"
-
 
     def clearText(self):
         report = self.ids['report']

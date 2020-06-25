@@ -31,6 +31,10 @@ WindowManager:
 <BackgroundTextInput@TextInput+BackgroundColor>
     background_color: 1, 1, 1, 1
 
+<NumericInput@TextInput>:
+    input_filter: 'float'
+    multiline: False
+
 
 #First screen that allows the user to take a picture
 <CameraWindow>:
@@ -150,7 +154,8 @@ WindowManager:
             size_hint: (0.05, 0.15)
             pos_hint: {'x': 0.05, 'y': 0.52}
 
-        TextInput:
+        NumericInput:
+            #text: str(root.value)
             id: id-label
             text: "Input badge number here" #this will be replaced with info from user
             multiline: True
@@ -159,6 +164,9 @@ WindowManager:
             size_hint: (0.275, 0.15)
             pos_hint: {'x': 0.675, 'y': 0.52}
             foreground_color: (1, 1, 1, 0.4)
+            on_text_validate:
+                root.value = float(self.text)
+                #root.validate(0, 9)
             on_focus:
                 root.clearIdText()
             padding_x:
