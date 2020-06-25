@@ -8,7 +8,6 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition, SlideTransition
 from kivy.uix.popup import Popup
-import Factory
 import time
 import json
 import os
@@ -115,13 +114,27 @@ class EnterInfoWindow(Screen):
         repInfracLabel.text = "0"
         nameLabel.foreground_color = (0, 0, 0, 0.4)
         nameLabel.foreground_color = (0, 0, 0, 0.4)
+    def addNewInfo(self):
+        obj = ConfirmPhotoWindow()
+        with open("CopDictionary.json", 'rb+') as file:
+            #data = json.load(file)
+            #newDictionary = {plateNumber: {"cop-id": 103, "name": "anotherCop", "official-infractions": 0, "reported-infractions": 0}}
+            #data.update(newDictionary)
+            file.seek(-1, os.SEEK_END)
+            file.truncate()
+
+        with open("CopDictionary.json", 'a+') as file:
+            #data = json.load(file)
+            appendString = ", \"" + obj.plateNumber + "\" : {\"cop-id\": 103, \"name\": \"anotherCop\", \"official-infractions\": 0, \"reported-infractions\": 0}}"
+            file.write(appendString)
+            #data.append(appendString)
+            #json.dump(data, file)
     pass
 
 
 class InfoWindow(Screen):
-    obj = ConfirmPhotoWindow()
     def getData(self):
-        plateNumber = "00000000"
+        obj = ConfirmPhotoWindow()
         nameLabel = self.ids['name-label']
         idLabel = self.ids['id-label']
         offInfracLabel = self.ids['off-infrac-label']
@@ -130,10 +143,10 @@ class InfoWindow(Screen):
         with open("CopDictionary.json", 'r+') as file:
             data = json.load(file)
 
-        plateNumber = "00000000"
-        documentedPlateFlag = False
+        #plateNumber = "00000000"
+        #documentedPlateFlag = False
         for PlateNums in data:
-            if PlateNums == plateNumber:
+            if PlateNums == obj.plateNumber:
                 nameLabel.text = "Name: " + str(data[PlateNums]["name"])
                 idLabel.text = str(data[PlateNums]["cop-id"])
                 offInfracLabel.text = str(data[PlateNums]["official-infractions"])

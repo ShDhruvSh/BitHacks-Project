@@ -213,6 +213,15 @@ WindowManager:
                 app.root.current = "fifth"
                 root.manager.transition.direction = "left"
 
+        Button:
+            text: "Submit New Cop"
+            size_hint: (0.5, 0.19)
+            pos_hint: {'x': 0.5, 'y': 0}
+            on_release:
+                root.addNewInfo()
+                app.root.current = "fifth"
+                root.manager.transition.direction = "left"
+
 
 #Third window for retrieving cop info from a database
 <InfoWindow>:
