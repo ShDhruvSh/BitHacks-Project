@@ -26,6 +26,9 @@ WindowManager:
 <BackgroundButton@Button+BackgroundColor>
     background_color: 1, 1, 1, 1
 
+<BackgroundTextInput@TextInput+BackgroundColor>
+    background_color: 1, 1, 1, 1
+
 
 #First screen that allows the user to take a picture
 <CameraWindow>:
@@ -86,6 +89,129 @@ WindowManager:
 
 <EnterInfoWindow>:
     name: "third"
+    FloatLayout:
+        BackgroundLabel:
+            text: "Name: "
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.45, 0.19)
+            pos_hint: {'x': 0.05, 'y': 0.80}
+            halign: 'right'
+            valign: 'middle'
+            text_size: self.size
+            font_size: 24
+
+        TextInput:
+            id: name-label
+            text: "Input name here" #this will be replaced with info from user
+            multiline: False
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.45, 0.19)
+            pos_hint: {'x': 0.5, 'y': 0.80}
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+            font_size: 24
+            foreground_color: (1, 1, 1, 0.4)
+            on_focus:
+                root.clearNameText()
+
+        BackgroundLabel:
+            text: "Badge Number: "
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.525, 0.19)
+            pos_hint: {'x': 0.1, 'y': 0.60}
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        BackgroundLabel:
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.05, 0.19)
+            pos_hint: {'x': 0.05, 'y': 0.60}
+
+        TextInput:
+            id: id-label
+            text: "Input badge number here" #this will be replaced with info from user
+            multiline: False
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.275, 0.19)
+            pos_hint: {'x': 0.675, 'y': 0.60}
+            foreground_color: (1, 1, 1, 0.4)
+            on_focus:
+                root.clearIdText()
+
+
+        BackgroundLabel:
+            text: "Official Infractions: "
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.525, 0.19)
+            pos_hint: {'x': 0.1, 'y': 0.40}
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        BackgroundLabel:
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.05, 0.19)
+            pos_hint: {'x': 0.05, 'y': 0.40}
+
+        BackgroundLabel:
+            id: off-infrac-label
+            text: "0" #this will be replaced with info from dictionary
+            multiline: False
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.275, 0.19)
+            pos_hint: {'x': 0.675, 'y': 0.40}
+
+        BackgroundLabel:
+            text: "Reported Infractions: "
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.525, 0.19)
+            pos_hint: {'x': 0.1, 'y': 0.2}
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        BackgroundLabel:
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.05, 0.19)
+            pos_hint: {'x': 0.05, 'y': 0.2}
+
+        BackgroundLabel:
+            id: rep-infrac-label
+            text: "0" #this will be replaced with info from dictionary
+            multiline: False
+            background_normal: ''
+            background_color: (0, 0, 1, 1)
+            size_hint: (0.275, 0.19)
+            pos_hint: {'x': 0.675, 'y': 0.2}
+
+        Button:
+            text: "Take Another Photo"
+            size_hint: (0.5, 0.19)
+            pos_hint: {'x': 0, 'y': 0}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+                root.clearData()
+
+        Button:
+            text: "Verify Cop Info"
+            size_hint: (0.5, 0.19)
+            pos_hint: {'x': 0.5, 'y': 0}
+            on_release:
+                app.root.current = "fifth"
+                root.manager.transition.direction = "left"
 
 
 #Third window for retrieving cop info from a database
@@ -217,7 +343,7 @@ WindowManager:
             id: report
             text: "Type out cop's infraction here"
             foreground_color: (0, 0, 0, 0.4)
-            on_touch_down:
+            on_focus:
                 root.clearText()
             multiline: True
             size_hint: (1.0, 0.8)

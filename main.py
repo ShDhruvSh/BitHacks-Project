@@ -91,6 +91,30 @@ class ConfirmPhotoWindow(Screen):
 
 
 class EnterInfoWindow(Screen):
+    def clearNameText(self):
+        nameLabel = self.ids['name-label']
+        if nameLabel.text == "Input name here":
+            nameLabel.text = ""
+        nameLabel.foreground_color = (0, 0, 0, 1)
+
+    def clearIdText(self):
+        idLabel = self.ids['id-label']
+        if idLabel.text == "Input badge number here":
+            idLabel.text = ""
+        idLabel.foreground_color = (0, 0, 0, 1)
+
+    def clearData(self):
+        nameLabel = self.ids['name-label']
+        idLabel = self.ids['id-label']
+        offInfracLabel = self.ids['off-infrac-label']
+        repInfracLabel = self.ids['rep-infrac-label']
+
+        nameLabel.text = "Input name here"
+        idLabel.text = "Input id here"
+        offInfracLabel.text = "0"
+        repInfracLabel.text = "0"
+        nameLabel.foreground_color = (0, 0, 0, 0.4)
+        nameLabel.foreground_color = (0, 0, 0, 0.4)
     pass
 
 
@@ -174,7 +198,8 @@ class ReportWindow(Screen):
 
     def clearText(self):
         report = self.ids['report']
-        report.text = ""
+        if report.text == "Type out cop's infraction here":
+            report.text = ""
         report.foreground_color = (0, 0, 0, 1)
 
     pass
