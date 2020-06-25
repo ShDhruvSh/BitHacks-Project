@@ -108,6 +108,10 @@ class EnterInfoWindow(Screen):
         offInfracLabel = self.ids['off-infrac-label']
         repInfracLabel = self.ids['rep-infrac-label']
 
+
+
+        self.addNewInfo(nameLabel.text, idLabel.text)
+
         nameLabel.text = "Input name here"
         idLabel.text = "Input id here"
         offInfracLabel.text = "0"
@@ -115,7 +119,7 @@ class EnterInfoWindow(Screen):
         nameLabel.foreground_color = (0, 0, 0, 0.4)
         nameLabel.foreground_color = (0, 0, 0, 0.4)
 
-    def addNewInfo(self):
+    def addNewInfo(self, copName, copID):
         obj = ConfirmPhotoWindow()
         with open("CopDictionary.json", 'rb+') as file:
             #data = json.load(file)
@@ -126,7 +130,7 @@ class EnterInfoWindow(Screen):
 
         with open("CopDictionary.json", 'a+') as file:
             #data = json.load(file)
-            appendString = ", \"" + obj.plateNumber + "\" : {\"cop-id\": 103, \"name\": \"anotherCop\", \"official-infractions\": 0, \"reported-infractions\": 0}}"
+            appendString = ", \"" + obj.plateNumber + "\" : {\"cop-id\":" + copID + ", \"name\": \"" + copName + "\", \"official-infractions\": 0, \"reported-infractions\": 0}}"
             file.write(appendString)
             #data.append(appendString)
             #json.dump(data, file)
