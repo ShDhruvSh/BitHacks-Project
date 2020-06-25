@@ -206,7 +206,7 @@ class ReportWindow(Screen):
     def submitReport(self):
         report = self.ids['report']
         obj = ConfirmPhotoWindow()
-        if report.text != "":
+        if report.text != "" and report.text != "Type out cop's infraction here":
             with open("CopDictionary.json", "r+") as file:
                 data = json.load(file)
                 data[obj.plateNumber]["reported-infractions"] += 1
@@ -243,7 +243,8 @@ class ReportWindow(Screen):
             report.text = "Type out cop's infraction here"
             report.foreground_color = (0, 0, 0, 0.4)
 
-        else:
+            self.parent.current = "sixth"
+        elif report.text == "" or report.text == "Type out cop's infraction here":
             self.parent.current = "fifth"
 
     def clearText(self):
