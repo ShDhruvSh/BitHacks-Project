@@ -1,3 +1,4 @@
+#Screen Manager to switch between different screens
 WindowManager:
     CameraWindow:
     ConfirmPhotoWindow:
@@ -5,6 +6,8 @@ WindowManager:
     ReportWindow:
     EndWindow:
 
+
+#Background color for widgets
 <BackgroundColor@Widget>
     background_color: 1, 1, 1, 1
     canvas.before:
@@ -14,9 +17,16 @@ WindowManager:
             size: self.size
             pos: self.pos
 
+
+#Background color for labels that are BackgroundLabels
 <BackgroundLabel@Label+BackgroundColor>
     background_color: 1, 1, 1, 1
 
+<BackgroundButton@Button+BackgroundColor>
+    background_color: 1, 1, 1, 1
+
+
+#First screen that allows the user to take a picture
 <CameraWindow>:
     name: "main"
 
@@ -34,15 +44,16 @@ WindowManager:
             pos_hint: {'x': 0, 'y': 0}
             on_press:
                 root.onCameraClick()
-                app.root.current = "confirm"
+                app.root.current = "second"
                 root.manager.transition.direction = "left"
 
 
+#Second screen that allows user to check their image and submit for processing
 <ConfirmPhotoWindow>:
-    name: "confirm"
+    name: "second"
 
     Button:
-        text: "Touch to see image"
+        text: "Verify Image"
         size_hint: (1, 0.2)
         pos_hint: {'x': 0, 'y': 0.8}
         on_release:
@@ -64,18 +75,17 @@ WindowManager:
             root.replaceImage()
 
     Button:
+        id: submit-photo
         text: "Submit Photo"
         size_hint: (0.5, 0.2)
         pos_hint: {'x': 0.5, 'y': 0}
-        on_release:
-            app.root.current = "second"
-            root.manager.transition.direction = "left"
-            root.replaceImage()
+        on_press:
+            root.showPopup()
 
 
-
+#Third window for retrieving cop info from a database
 <InfoWindow>:
-    name: "second"
+    name: "third"
 
     FloatLayout:
         Button:
@@ -187,11 +197,13 @@ WindowManager:
             size_hint: (0.5, 0.19)
             pos_hint: {'x': 0.5, 'y': 0}
             on_release:
-                app.root.current = "third"
+                app.root.current = "fourth"
                 root.manager.transition.direction = "left"
 
+
+#Fourth window for reporting a new infraction that a cop has made
 <ReportWindow>:
-    name: "third"
+    name: "fourth"
 
     FloatLayout:
         TextInput:
@@ -209,7 +221,7 @@ WindowManager:
             size_hint: (0.5, 0.2)
             pos_hint: {'x': 0, 'y': 0}
             on_release:
-                app.root.current = "second"
+                app.root.current = "third"
                 root.manager.transition.direction = "right"
 
         Button:
@@ -218,12 +230,13 @@ WindowManager:
             pos_hint: {'x': 0.5, 'y': 0}
             on_release:
                 root.submitReport()
-                app.root.current = "fourth"
+                app.root.current = "fifth"
                 root.manager.transition.direction = "left"
 
 
+#Fifth window for exiting app or taking another picture
 <EndWindow>:
-    name: "fourth"
+    name: "fifth"
 
     FloatLayout:
         Label:
@@ -246,3 +259,16 @@ WindowManager:
             pos_hint: {'x': 0.5, 'y': 0}
             on_release:
                 app.stop()
+
+<P>:
+    Label:
+        text: "Error: Please click \"Verify Image\" before submitting photo!"
+        size_hint: (1, 1)
+        pos_hint: {'x': 0, 'y': 0}
+
+    Button:
+        text: "X"
+        background_normal: ''
+        background_color: (1, 0, 0, 1)
+        size_hint: (0.1, 0.05)
+        pos_hint: {'x': 0.9, 'y': 0.95}

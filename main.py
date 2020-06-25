@@ -1,11 +1,9 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.image import Image
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition, SlideTransition
 from kivy.uix.popup import Popup
 import time
-import random
 import json
 
 #plateNumber = ""
@@ -29,6 +27,21 @@ class ConfirmPhotoWindow(Screen):
     def replaceImage(self):
         plate_image = self.ids['plate_image']
         plate_image.source = ""
+
+    def showPopup(self):
+        plateImage = self.ids['plate_image']
+        submitPhoto = self.ids['submit-photo']
+        show = P()
+
+        popupWindow = Popup(title = "ERROR 404 YOUR COMPUTER IS CORRUPTED INSTALL ANTIVIRUS IMMEDIATELY", content = show, size_hint = (0.5, 0.5))
+
+        if len(str(plateImage.source)) > 0:
+            self.parent.current = "third"
+            self.replaceImage()
+        else:
+            self.parent.current = "second"
+            self.replaceImage()
+            popupWindow.open()
     pass
 
 
@@ -52,7 +65,6 @@ class InfoWindow(Screen):
                 repInfracLabel.text = str(data[PlateNums]["reported-infractions"])
             #else
                 #plateNumber + ": {\"cop-id\": 1001, \"name\": \"anotherCop\", \"official-infractions\": 0, \"reported-infractions\": 0}"
-
 
     '''
     def recordData(self, plate):
@@ -96,6 +108,10 @@ class EndWindow(Screen):
 
 
 class WindowManager(ScreenManager):
+    pass
+
+
+class P(FloatLayout):
     pass
 
 
