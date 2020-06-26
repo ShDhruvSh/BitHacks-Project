@@ -1,0 +1,34 @@
+Is this really the best America can do?
+It seems like practically every day there is a new report
+of police misconduct, brutality, or even murder.
+Even if only in a small way, we want to help aid the movement
+against these atrocities using our knowledge of AI.
+The heart of the movements against police brutality fundamentally
+focus around the idea that we need to identify the bad cops and
+remove them from the so that the police can fairly and appropriately enforce
+justice. With that idea in mind we created an app that is used to
+separate the good from the bad using a combination of official and
+communally sourced data. Here's how it works: First the user takes a photo of
+an officers licence plate using the apps built in camera. Then this image will be
+processed first using OpenCV AI to identify the licence plate and crop the image to fit it.
+This AI will then separate the plate into smaller pictures of the different numbers and letters
+comprising the plate. Finally these smaller images are run though another AI model we
+trained completely from scratch which determines the correct character that picture
+contains. Finally all of these characters are pieced together as a string and sent
+back to the apps frontend side where the plate numbers are displayed and the
+user is given the chance to correct any possible errors made in the AI's analysis.
+Then if the cop already exists in the database, the page will take you to
+the cops info. As can be seen above, it returns his/her name, badge number, number of official infractions,
+and number of locally reported infractions. If the cop does not yet exist in the database,
+then the user will be given the option of filling in the info about the cop.
+Finally, the most important feature is the users ability to locally report a cop for misconduct
+and fill out in what way he/she felt justice was undermined. This way similarly to many other crowd-sourcing
+apps, our app can be used to separate the power-hungry and evil from the benevolent. As a community
+we have come together to fight against this injustice, our app will provide an additional facet with
+which we can do so.
+
+
+
+
+
+We can add additional facts on the side of the imovie that can be used for clarification
