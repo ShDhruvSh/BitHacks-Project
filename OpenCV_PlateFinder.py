@@ -47,11 +47,9 @@ def get_plate(image_path):
     _ , LpImg, _, cor = detect_lp(wpod_net, vehicle, bound_dim, lp_threshold=0.5)
     count = 0
     for img in LpImg:
-        plt.imsave("scans/cropped" + str(count) + ".jpg", img)
+        plt.imsave("croppedImgs/cropped" + str(count) + ".jpg", img)
         count += 1
     return LpImg
-
-img = get_plate("PhotosToClean/download-4.jpg")[0]
 
 def get_digits(image_path, lp_num):
     cropped = cv2.imread(image_path, cv2.CV_8UC1)
