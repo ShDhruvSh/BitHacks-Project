@@ -13,10 +13,10 @@ import time
 import json
 import os
 import OpenCV_PlateFinder
-
+import Use_Model
 from kivy.uix.textinput import TextInput
 
-plateNumber = "00000001"
+plateNumber = Use_Model.predictionMethods.returnDigits()
 imageName = ""
 
 
@@ -201,7 +201,7 @@ class EnterInfoWindow(Screen):
         if nameLabel.text == "Input name here":
             nameLabel.text = ""
         nameLabel.foreground_color = (1, 1, 1, 1)
-        print plateNumber
+        print(plateNumber)
 
     def clearIdText(self):
         idLabel = self.ids['id-label']
