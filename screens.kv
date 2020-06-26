@@ -63,6 +63,62 @@ WindowManager:
 <ConfirmPhotoWindow>:
     name: "second"
 
+    TextInput:
+        text: "0" #root.plateNumber[0]
+        id: plate0
+        size_hint: (0.1, 0.1)
+        pos_hint: {'x': 0.1, 'y': 0.8}
+        font_size: 24
+
+    TextInput:
+        text: "1" #root.plateNumber[1]
+        id: plate1
+        size_hint: (0.1, 0.1)
+        pos_hint: {'x': 0.2, 'y': 0.8}
+        font_size: 24
+
+    TextInput:
+        text: "2" #root.plateNumber[2]
+        id: plate2
+        size_hint: (0.1, 0.1)
+        pos_hint: {'x': 0.3, 'y': 0.8}
+        font_size: 24
+
+    TextInput:
+        text: "3" #root.plateNumber[3]
+        id: plate3
+        size_hint: (0.1, 0.1)
+        pos_hint: {'x': 0.4, 'y': 0.8}
+        font_size: 24
+
+    TextInput:
+        text: "4" #root.plateNumber[4]
+        id: plate4
+        size_hint: (0.1, 0.1)
+        pos_hint: {'x': 0.5, 'y': 0.8}
+        font_size: 24
+
+    TextInput:
+        text: "5" #root.plateNumber[5]
+        id: plate5
+        size_hint: (0.1, 0.1)
+        pos_hint: {'x': 0.6, 'y': 0.8}
+        font_size: 24
+
+    TextInput:
+        text: "6" #root.plateNumber[6]
+        id: plate6
+        size_hint: (0.1, 0.1)
+        pos_hint: {'x': 0.7, 'y': 0.8}
+        font_size: 24
+
+    TextInput:
+        text: "7" #root.plateNumber[7]
+        id: plate7
+        size_hint: (0.1, 0.1)
+        pos_hint: {'x': 0.8, 'y': 0.8}
+        font_size: 24
+
     Button:
         text: "Verify Image"
         size_hint: (1, 0.1)
@@ -70,56 +126,8 @@ WindowManager:
         on_release:
             root.getImage()
 
-    TextInput:
-        text: "" #root.plateNumber[0]
-        size_hint: (0.1, 0.1)
-        pos_hint: {'x': 0.10, 'y': 0.8}
-        font_size: 24
-
-    TextInput:
-        text: "" #root.plateNumber[1]
-        size_hint: (0.1, 0.1)
-        pos_hint: {'x': 0.20, 'y': 0.8}
-        font_size: 24
-
-    TextInput:
-        text: "" #root.plateNumber[2]
-        size_hint: (0.1, 0.1)
-        pos_hint: {'x': 0.30, 'y': 0.8}
-        font_size: 24
-
-    TextInput:
-        text: "" #root.plateNumber[3]
-        size_hint: (0.1, 0.1)
-        pos_hint: {'x': 0.40, 'y': 0.8}
-        font_size: 24
-
-    TextInput:
-        text: "" #root.plateNumber[4]
-        size_hint: (0.1, 0.1)
-        pos_hint: {'x': 0.50, 'y': 0.8}
-        font_size: 24
-
-    TextInput:
-        text: "" #root.plateNumber[5]
-        size_hint: (0.1, 0.1)
-        pos_hint: {'x': 0.60, 'y': 0.8}
-        font_size: 24
-
-    TextInput:
-        text: "" #root.plateNumber[6]
-        size_hint: (0.1, 0.1)
-        pos_hint: {'x': 0.70, 'y': 0.8}
-        font_size: 24
-
-    TextInput:
-        text: "" #root.plateNumber[7]
-        size_hint: (0.1, 0.1)
-        pos_hint: {'x': 0.80, 'y': 0.8}
-        font_size: 24
-
     Image:
-        id: plate_image
+        id: plate-image
         source: ""
         size_hint: (1, 0.6)
         pos_hint: {'x': 0, 'y': 0.2}

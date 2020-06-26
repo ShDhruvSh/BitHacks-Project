@@ -6,12 +6,15 @@ from kivy.properties import NumericProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.image import Image
 from kivy.uix.label import Label
-from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition, SlideTransition
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.popup import Popup
 import time
 import json
 import os
+
+from kivy.uix.textinput import TextInput
 
 imageName = ""
 
@@ -27,15 +30,37 @@ class CameraWindow(Screen):
     pass
 
 
-class ConfirmPhotoWindow(Screen):
+class ConfirmPhotoWindow(Screen, FloatLayout):
     plateNumber = "00000001"
 
+    floatLayout = FloatLayout()
+
     def getImage(self):
-        plate_image = self.ids['plate_image']
-        plate_image.source = imageName
+        plateImage = self.ids['plate-image']
+        plateImage.source = imageName
+        plate6 = self.ids['plate5']
+        plate7 = self.ids['plate6']
+        plate8 = self.ids['plate7']
+
+        length = len(self.plateNumber) - 1
+
+        if length < float(plate8.text):
+            plate8.size_hint = 0, 0
+            plate8.size = 0, 0
+            print ("True" + float(plate8.text))
+
+        if length < float(plate7.text):
+            plate7.size_hint = 0.01, 0.01
+            plate7.size = 0, 0
+            print ("True" + float(plate7.text))
+
+        if length < float(plate6.text):
+            plate6.size_hint = 0.005, 0.005
+            plate6.size = 0, 0
+            print ("True" + float(plate6.text))
 
     def replaceImage(self):
-        plate_image = self.ids['plate_image']
+        plate_image = self.ids['plate-image']
         plate_image.source = ""
 
     def isNewPlate(self):
@@ -54,7 +79,7 @@ class ConfirmPhotoWindow(Screen):
         return not documentedPlateFlag
 
     def showPopup(self):
-        plateImage = self.ids['plate_image']
+        plateImage = self.ids['plate-image']
         layout = FloatLayout()
         popupLabel = Label(text="Error: Please click "
                                 "\n\"Verify Image\" before "
@@ -74,7 +99,7 @@ class ConfirmPhotoWindow(Screen):
         layout.add_widget(popupButton)
 
         popupWindow = Popup(title="ERROR: VERIFY IMAGE",
-                            #"ERROR 404 YOUR COMPUTER IS CORRUPTED INSTALL ANTIVIRUS IMMEDIATELY",
+                            # "ERROR 404 YOUR COMPUTER IS CORRUPTED INSTALL ANTIVIRUS IMMEDIATELY",
                             content=layout,
                             size_hint=(None, None),
                             size=(250, 250))
@@ -90,6 +115,8 @@ class ConfirmPhotoWindow(Screen):
             self.parent.current = "second"
             self.replaceImage()
             popupWindow.open()
+
+    pass
 
 
 class EnterInfoWindow(Screen):
@@ -227,12 +254,12 @@ class ReportWindow(Screen):
             #    file.truncate()
 
             # Serializing json
-            #json_object = json.dumps(dictionary, indent=4)
+            # json_object = json.dumps(dictionary, indent=4)
 
             # Writing to reports.json
             with open("reports.json", "r+") as file:
                 data = json.load(file)
-            #    file.write(json_object)
+                #    file.write(json_object)
                 plateThere = False
                 for PlateNums in data:
                     if (PlateNums == obj.plateNumber):
