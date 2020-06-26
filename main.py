@@ -1,3 +1,4 @@
+import tensorflow as tf
 import itertools
 from kivy.app import App
 from kivy.lang import Builder

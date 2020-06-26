@@ -20,7 +20,7 @@ class predictionMethods():
         model.load_weights('model.h5')
 
         imgSize = 28
-        imgPath = '/Users/jakewriter/PycharmProjects/BitHacks-project/scans/' + imgFile
+        imgPath = '/Users/eamspoker21/BitHacks-project/scans/' + imgFile
         prediction = 0
         try:
             img_array = cv2.imread(imgPath, cv2.IMREAD_GRAYSCALE)
