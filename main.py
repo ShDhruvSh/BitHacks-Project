@@ -12,13 +12,14 @@ from kivy.uix.popup import Popup
 import time
 import json
 import os
-import OpenCV_PlateFinder
-import Use_Model
+#import OpenCV_PlateFinder
+#import Use_Model
 from kivy.uix.textinput import TextInput
 
-prediction = Use_Model.predictionMethods()
+#prediction = Use_Model.predictionMethods()
 
-plateNumber = prediction.returnDigits()
+#plateNumber = prediction.returnDigits()
+plateNumber = "00000001"
 imageName = ""
 
 
@@ -30,7 +31,7 @@ class CameraWindow(Screen):
         imageName = "IMG_" + timestr + ".png"
         camera.export_to_png(imageName)
         print("IMAGE: " + imageName)
-        OpenCV_PlateFinder.scan_plate(imageName)
+        #OpenCV_PlateFinder.scan_plate(imageName)
 
     pass
 
@@ -218,14 +219,19 @@ class EnterInfoWindow(Screen):
         offInfracLabel = self.ids['off-infrac-label']
         repInfracLabel = self.ids['rep-infrac-label']
 
-        self.addNewInfo(nameLabel.text, idLabel.text)
+        if nameLabel.text != "Input name here" and idLabel.text != "Input badge number here" \
+                and nameLabel.text!= "" and idLabel.text != "":
+            self.parent.current = "fourth"
+            self.addNewInfo(nameLabel.text, idLabel.text)
+            nameLabel.text = "Input name here"
+            idLabel.text = "Input badge number here"
+            offInfracLabel.text = "0"
+            repInfracLabel.text = "0"
+            nameLabel.foreground_color = (0, 0, 0, 0.4)
+            nameLabel.foreground_color = (0, 0, 0, 0.4)
+        else:
+            self.parent.current = "third"
 
-        nameLabel.text = "Input name here"
-        idLabel.text = "Input id here"
-        offInfracLabel.text = "0"
-        repInfracLabel.text = "0"
-        nameLabel.foreground_color = (0, 0, 0, 0.4)
-        nameLabel.foreground_color = (0, 0, 0, 0.4)
 
     def addNewInfo(self, copName, copID):
         obj = ConfirmPhotoWindow()
