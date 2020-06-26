@@ -15,7 +15,7 @@ This AI will then separate the plate into smaller pictures of the different numb
 comprising the plate. Finally these smaller images are run though another AI model we
 trained completely from scratch which determines the correct character that picture
 contains. Finally all of these characters are pieced together as a string and sent
-back to the apps frontend side where the plate numbers are displayed and the
+back to the apps frontend side, where the plate numbers are displayed and the
 user is given the chance to correct any possible errors made in the AI's analysis.
 Then if the cop already exists in the database, the page will take you to
 the cops info. As can be seen above, it returns his/her name, badge number, number of official infractions,

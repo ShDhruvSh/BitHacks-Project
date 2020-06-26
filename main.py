@@ -1,5 +1,4 @@
 import itertools
-
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import NumericProperty
@@ -13,6 +12,7 @@ from kivy.uix.popup import Popup
 import time
 import json
 import os
+import OpenCV_PlateFinder
 
 from kivy.uix.textinput import TextInput
 
@@ -27,6 +27,7 @@ class CameraWindow(Screen):
         global imageName
         imageName = "IMG_" + timestr + ".png"
         camera.export_to_png(imageName)
+        OpenCV_PlateFinder.scan_plate(imageName)
 
     pass
 
