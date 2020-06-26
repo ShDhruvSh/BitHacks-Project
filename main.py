@@ -47,16 +47,6 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
         plate6 = self.ids['plate6']
         plate7 = self.ids['plate7']
 
-        plate0.text = plateNumber[0]
-        plate1.text = plateNumber[1]
-        plate2.text = plateNumber[2]
-        plate3.text = plateNumber[3]
-        plate4.text = plateNumber[4]
-        plate5.text = plateNumber[5]
-        plate6.text = plateNumber[6]
-        plate7.text = plateNumber[7]
-
-
 
         length = len(self.plateNumber) - 1
 
@@ -91,6 +81,15 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
         if length < float(plate0.text):
             plate0.size_hint = 0.005, 0.005
             plate0.size = 0, 0
+
+        plate0.text = self.plateNumber[0]
+        plate1.text = self.plateNumber[1]
+        plate2.text = self.plateNumber[2]
+        plate3.text = self.plateNumber[3]
+        plate4.text = self.plateNumber[4]
+        plate5.text = self.plateNumber[5]
+        plate6.text = self.plateNumber[6]
+        plate7.text = self.plateNumber[7]
 
 
     def replaceImage(self):
