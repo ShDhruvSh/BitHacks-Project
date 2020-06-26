@@ -12,11 +12,13 @@ from kivy.uix.popup import Popup
 import time
 import json
 import os
-#import OpenCV_PlateFinder
-#import Use_Model
+import OpenCV_PlateFinder
+import Use_Model
 from kivy.uix.textinput import TextInput
 
-plateNumber = "00000001"
+prediction = Use_Model.predictionMethods()
+
+plateNumber = prediction.returnDigits()
 imageName = ""
 
 
@@ -28,7 +30,7 @@ class CameraWindow(Screen):
         imageName = "IMG_" + timestr + ".png"
         camera.export_to_png(imageName)
         print("IMAGE: " + imageName)
-        #OpenCV_PlateFinder.scan_plate(imageName)
+        OpenCV_PlateFinder.scan_plate(imageName)
 
     pass
 

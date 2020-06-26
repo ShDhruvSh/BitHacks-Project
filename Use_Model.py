@@ -1,3 +1,4 @@
+import tensorflow as tf
 from keras.models import load_model
 from keras.models import Sequential
 from keras.layers import Dense
@@ -8,10 +9,10 @@ import os
 from PIL import Image
 
 class predictionMethods():
+    def __init__(self):
+        pass
     def returnPrediction(self, imgFile):
-
         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-
         model = Sequential()
         model.add(Dense(64, activation='relu', input_dim=784))
         model.add(Dense(64, activation='relu'))
@@ -69,14 +70,3 @@ class predictionMethods():
             i += 1
 
         return plateNum
-
-test = predictionMethods()
-
-
-
-
-
-
-
-
-
