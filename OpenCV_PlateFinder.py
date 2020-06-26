@@ -71,12 +71,13 @@ def get_digits(image_path, lp_num):
         # compute the bounding box of the contour
         (x, y, w, h) = cv2.boundingRect(c)
         # if the contour is sufficiently large, it must be a digit
-        if (w <= 400)and (h >= 100):
+        if (w <= 100)and (h >= 200):
             digitCnts.append(c)
             digit = image[y:y+h, x:x+w]
             plt.imsave("scans/digit"+ str(lp_num) + "-" + str(count)+".jpg", digit)
             count += 1
-        cv2.rectangle(image, (x,y), (x+w, y+h), (0,255,0), 2)
+            cv2.rectangle(image, (x,y), (x+w, y+h), (0,255,0), 2)
+
 
 # scan each plate in the image and get the digits
 def scan_plate(image_path):
