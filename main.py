@@ -38,15 +38,27 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
     def getImage(self):
         plateImage = self.ids['plate-image']
         plateImage.source = imageName
-        plate6 = self.ids['plate5']
-        plate7 = self.ids['plate6']
-        plate8 = self.ids['plate7']
+        plate0 = self.ids['plate0']
+        plate1 = self.ids['plate1']
+        plate2 = self.ids['plate2']
+        plate3 = self.ids['plate3']
+        plate4 = self.ids['plate4']
+        plate5 = self.ids['plate5']
+        plate6 = self.ids['plate6']
+        plate7 = self.ids['plate7']
+
+        plate0.text = plateNumber[0]
+        plate1.text = plateNumber[1]
+        plate2.text = plateNumber[2]
+        plate3.text = plateNumber[3]
+        plate4.text = plateNumber[4]
+        plate5.text = plateNumber[5]
+        plate6.text = plateNumber[6]
+        plate7.text = plateNumber[7]
+
+
 
         length = len(self.plateNumber) - 1
-
-        if length < float(plate8.text):
-            plate8.size_hint = 0.005, 0.005
-            plate8.size = 0, 0
 
         if length < float(plate7.text):
             plate7.size_hint = 0.005, 0.005
@@ -55,6 +67,30 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
         if length < float(plate6.text):
             plate6.size_hint = 0.005, 0.005
             plate6.size = 0, 0
+
+        if length < float(plate5.text):
+            plate5.size_hint = 0.005, 0.005
+            plate5.size = 0, 0
+
+        if length < float(plate4.text):
+            plate4.size_hint = 0.005, 0.005
+            plate4.size = 0, 0
+
+        if length < float(plate3.text):
+            plate3.size_hint = 0.005, 0.005
+            plate3.size = 0, 0
+
+        if length < float(plate2.text):
+            plate2.size_hint = 0.005, 0.005
+            plate2.size = 0, 0
+
+        if length < float(plate1.text):
+            plate1.size_hint = 0.005, 0.005
+            plate1.size = 0, 0
+
+        if length < float(plate0.text):
+            plate0.size_hint = 0.005, 0.005
+            plate0.size = 0, 0
 
 
     def replaceImage(self):
