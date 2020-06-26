@@ -16,6 +16,7 @@ import os
 
 from kivy.uix.textinput import TextInput
 
+plateNumber = "00000001"
 imageName = ""
 
 
@@ -30,8 +31,8 @@ class CameraWindow(Screen):
     pass
 
 
-class ConfirmPhotoWindow(Screen, FloatLayout):
-    plateNumber = "00000001"
+class ConfirmPhotoWindow(Screen):
+    #plateNumber = "00000001"
 
     floatLayout = FloatLayout()
 
@@ -47,7 +48,10 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
         plate6 = self.ids['plate6']
         plate7 = self.ids['plate7']
 
-        length = len(self.plateNumber) - 1
+#        length = len(self.plateNumber) - 1
+        length = len(plateNumber) - 1
+        print (plateNumber)
+        print (length)
 
         if length < float(plate7.text):
             plate7.size_hint = 0.005, 0.005
@@ -75,35 +79,43 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
             plate0.size = 0, 0
 
         if length >= float(plate7.text):
-            plate7.text = self.plateNumber[7]
+#            plate7.text = self.plateNumber[7]
+            plate7.text = plateNumber[7]
         else:
             plate7.text = ""
         if length >= float(plate6.text):
-            plate6.text = self.plateNumber[6]
+#            plate6.text = self.plateNumber[6]
+            plate6.text = plateNumber[6]
         else:
             plate6.text = ""
         if length >= float(plate5.text):
-            plate5.text = self.plateNumber[5]
+#            plate5.text = self.plateNumber[5]
+            plate5.text = plateNumber[5]
         else:
             plate5.text = ""
         if length >= float(plate4.text):
-            plate4.text = self.plateNumber[4]
+#            plate4.text = self.plateNumber[4]
+            plate4.text = plateNumber[4]
         else:
             plate4.text = ""
         if length >= float(plate3.text):
-            plate3.text = self.plateNumber[3]
+#            plate3.text = self.plateNumber[3]
+            plate3.text = plateNumber[3]
         else:
             plate3.text = ""
         if length >= float(plate2.text):
-            plate2.text = self.plateNumber[2]
+#            plate2.text = self.plateNumber[2]
+            plate2.text = plateNumber[2]
         else:
             plate2.text = ""
         if length >= float(plate1.text):
-            plate1.text = self.plateNumber[1]
+#            plate1.text = self.plateNumber[1]
+            plate1.text = plateNumber[1]
         else:
             plate1.text = ""
         if length >= float(plate0.text):
-            plate0.text = self.plateNumber[0]
+#            plate0.text = self.plateNumber[0]
+            plate0.text = plateNumber[0]
         else:
             plate0.text = ""
 
@@ -112,7 +124,6 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
         plate_image.source = ""
 
     def isNewPlate(self):
-        plateNumber = "00000001"
         documentedPlateFlag = False
 
         with open("CopDictionary.json", 'r+') as file:
@@ -128,7 +139,16 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
 
     def showPopup(self):
         plateImage = self.ids['plate-image']
+        plate0 = self.ids['plate0']
+        plate1 = self.ids['plate1']
+        plate2 = self.ids['plate2']
+        plate3 = self.ids['plate3']
+        plate4 = self.ids['plate4']
+        plate5 = self.ids['plate5']
+        plate6 = self.ids['plate6']
+        plate7 = self.ids['plate7']
         layout = FloatLayout()
+
         popupLabel = Label(text="Error: Please click "
                                 "\n\"Verify Image\" before "
                                 "\nsubmitting photo!",
@@ -143,6 +163,7 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
                              size_hint=(0.1, 0.05),
                              pos_hint={'x': 0.9, 'y': 0.9},
                              font_size=12)
+
         layout.add_widget(popupLabel)
         layout.add_widget(popupButton)
 
@@ -159,6 +180,12 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
             else:
                 self.parent.current = "fourth"
             self.replaceImage()
+#            self.plateNumber =
+            global plateNumber
+            plateNumber = plate0.text + plate1.text + plate2.text + plate3.text + plate4.text + \
+                               plate5.text + plate6.text + plate7.text
+            print (plateNumber)
+
         else:
             self.parent.current = "second"
             self.replaceImage()
@@ -173,6 +200,7 @@ class EnterInfoWindow(Screen):
         if nameLabel.text == "Input name here":
             nameLabel.text = ""
         nameLabel.foreground_color = (1, 1, 1, 1)
+        print plateNumber
 
     def clearIdText(self):
         idLabel = self.ids['id-label']
@@ -206,7 +234,7 @@ class EnterInfoWindow(Screen):
 
         with open("CopDictionary.json", 'a+') as file:
             # data = json.load(file)
-            appendString = ", \"" + obj.plateNumber + "\" : {\"cop-id\":" + copID + ", \"name\": \"" + copName + "\", \"official-infractions\": 0, \"reported-infractions\": 0}}"
+            appendString = ", \"" + plateNumber + "\" : {\"cop-id\":" + copID + ", \"name\": \"" + copName + "\", \"official-infractions\": 0, \"reported-infractions\": 0}}"
             file.write(appendString)
             # data.append(appendString)
             # json.dump(data, file)
@@ -216,7 +244,7 @@ class EnterInfoWindow(Screen):
 
 class InfoWindow(Screen):
     def getData(self):
-        obj = ConfirmPhotoWindow()
+        #obj = ConfirmPhotoWindow()
         nameLabel = self.ids['name-label']
         idLabel = self.ids['id-label']
         offInfracLabel = self.ids['off-infrac-label']
@@ -228,7 +256,7 @@ class InfoWindow(Screen):
         # plateNumber = "00000000"
         # documentedPlateFlag = False
         for PlateNums in data:
-            if PlateNums == obj.plateNumber:
+            if PlateNums == plateNumber:
                 nameLabel.text = "Name: " + str(data[PlateNums]["name"])
                 idLabel.text = str(data[PlateNums]["cop-id"])
                 offInfracLabel.text = str(data[PlateNums]["official-infractions"])
@@ -284,7 +312,7 @@ class ReportWindow(Screen):
         if report.text != "" and report.text != "Type out cop's infraction here":
             with open("CopDictionary.json", "r+") as file:
                 data = json.load(file)
-                data[obj.plateNumber]["reported-infractions"] += 1
+                data[plateNumber]["reported-infractions"] += 1
                 # reportDictionary = {"reported-infractions": (data[obj.plateNumber]["reported-infractions"]+1)}
                 # data[obj.plateNumber].update(reportDictionary)
 
@@ -293,8 +321,8 @@ class ReportWindow(Screen):
                 file.truncate()
 
                 dictionary = {
-                    obj.plateNumber: {
-                        str(data[obj.plateNumber]["reported-infractions"]): report.text
+                    plateNumber: {
+                        str(data[plateNumber]["reported-infractions"]): report.text
                     }
                 }
 
@@ -310,13 +338,13 @@ class ReportWindow(Screen):
                 #    file.write(json_object)
                 plateThere = False
                 for PlateNums in data:
-                    if (PlateNums == obj.plateNumber):
+                    if (PlateNums == plateNumber):
                         plateThere = True
 
                 if not plateThere:
                     data.update(dictionary)
                 else:
-                    data[obj.plateNumber].update(dictionary[obj.plateNumber])
+                    data[plateNumber].update(dictionary[plateNumber])
 
                 file.seek(0)  # go back to beginning of file
                 file.truncate()
