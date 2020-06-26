@@ -47,50 +47,65 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
         plate6 = self.ids['plate6']
         plate7 = self.ids['plate7']
 
-
         length = len(self.plateNumber) - 1
 
         if length < float(plate7.text):
             plate7.size_hint = 0.005, 0.005
             plate7.size = 0, 0
-
         if length < float(plate6.text):
             plate6.size_hint = 0.005, 0.005
             plate6.size = 0, 0
-
         if length < float(plate5.text):
             plate5.size_hint = 0.005, 0.005
             plate5.size = 0, 0
-
         if length < float(plate4.text):
             plate4.size_hint = 0.005, 0.005
             plate4.size = 0, 0
-
         if length < float(plate3.text):
             plate3.size_hint = 0.005, 0.005
             plate3.size = 0, 0
-
         if length < float(plate2.text):
             plate2.size_hint = 0.005, 0.005
             plate2.size = 0, 0
-
         if length < float(plate1.text):
             plate1.size_hint = 0.005, 0.005
             plate1.size = 0, 0
-
         if length < float(plate0.text):
             plate0.size_hint = 0.005, 0.005
             plate0.size = 0, 0
 
-        plate0.text = self.plateNumber[0]
-        plate1.text = self.plateNumber[1]
-        plate2.text = self.plateNumber[2]
-        plate3.text = self.plateNumber[3]
-        plate4.text = self.plateNumber[4]
-        plate5.text = self.plateNumber[5]
-        plate6.text = self.plateNumber[6]
-        plate7.text = self.plateNumber[7]
-
+        if length >= float(plate7.text):
+            plate7.text = self.plateNumber[7]
+        else:
+            plate7.text = ""
+        if length >= float(plate6.text):
+            plate6.text = self.plateNumber[6]
+        else:
+            plate6.text = ""
+        if length >= float(plate5.text):
+            plate5.text = self.plateNumber[5]
+        else:
+            plate5.text = ""
+        if length >= float(plate4.text):
+            plate4.text = self.plateNumber[4]
+        else:
+            plate4.text = ""
+        if length >= float(plate3.text):
+            plate3.text = self.plateNumber[3]
+        else:
+            plate3.text = ""
+        if length >= float(plate2.text):
+            plate2.text = self.plateNumber[2]
+        else:
+            plate2.text = ""
+        if length >= float(plate1.text):
+            plate1.text = self.plateNumber[1]
+        else:
+            plate1.text = ""
+        if length >= float(plate0.text):
+            plate0.text = self.plateNumber[0]
+        else:
+            plate0.text = ""
 
     def replaceImage(self):
         plate_image = self.ids['plate-image']
