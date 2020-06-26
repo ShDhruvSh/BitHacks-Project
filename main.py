@@ -45,19 +45,17 @@ class ConfirmPhotoWindow(Screen, FloatLayout):
         length = len(self.plateNumber) - 1
 
         if length < float(plate8.text):
-            plate8.size_hint = 0, 0
+            plate8.size_hint = 0.005, 0.005
             plate8.size = 0, 0
-            print ("True" + float(plate8.text))
 
         if length < float(plate7.text):
-            plate7.size_hint = 0.01, 0.01
+            plate7.size_hint = 0.005, 0.005
             plate7.size = 0, 0
-            print ("True" + float(plate7.text))
 
         if length < float(plate6.text):
             plate6.size_hint = 0.005, 0.005
             plate6.size = 0, 0
-            print ("True" + float(plate6.text))
+
 
     def replaceImage(self):
         plate_image = self.ids['plate-image']
