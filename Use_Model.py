@@ -74,9 +74,8 @@ class predictionMethods():
 
         return plateNum
 
-test = predictionMethods()
 
-print(test.returnDigits())
+
 
 
 
