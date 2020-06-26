@@ -32,9 +32,9 @@ class CameraWindow(Screen):
         camera.export_to_png(imageName)
         print("IMAGE: " + imageName)
         OpenCV_PlateFinder.scan_plate(imageName)
-        print plateNumber
         global plateNumber
         plateNumber = prediction.returnDigits()
+        print(plateNumber)
 
     pass
 
