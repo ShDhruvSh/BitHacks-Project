@@ -58,10 +58,6 @@ class predictionMethods():
 
         return prediction
 
-    '''
-    
-    
-    '''
     def returnDigits(self):
         dir = './scans/'
         path = os.path.join(dir)
@@ -74,7 +70,7 @@ class predictionMethods():
 
         return plateNum
 
-
+test = predictionMethods()
 
 
 
