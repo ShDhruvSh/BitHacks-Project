@@ -10,7 +10,6 @@ from os.path import splitext, basename
 from keras.models import model_from_json
 import glob
 
-%matplotlib inline
 
 
 def load_model(path):

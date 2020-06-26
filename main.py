@@ -16,7 +16,7 @@ import OpenCV_PlateFinder
 import Use_Model
 from kivy.uix.textinput import TextInput
 
-plateNumber = Use_Model.predictionMethods.returnDigits()
+plateNumber = "00000001"
 imageName = ""
 
 
@@ -27,6 +27,7 @@ class CameraWindow(Screen):
         global imageName
         imageName = "IMG_" + timestr + ".png"
         camera.export_to_png(imageName)
+        print("IMAGE: " + imageName)
         OpenCV_PlateFinder.scan_plate(imageName)
 
     pass
