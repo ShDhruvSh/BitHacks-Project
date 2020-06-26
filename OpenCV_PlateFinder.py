@@ -9,6 +9,7 @@ from utils import detect_lp
 from os.path import splitext, basename
 from keras.models import model_from_json
 import glob
+import os
 
 
 
@@ -65,6 +66,11 @@ def get_digits(image_path, lp_num):
     cnts = imutils.grab_contours(cnts)
     digitCnts = []
     # loop over the digit area candidates
+    # clear scans
+    files = glob.glob('scans/*')
+    for f in files:
+        os.remove(f)
+
     count = 0
     for c in cnts:
         # compute the bounding box of the contour
