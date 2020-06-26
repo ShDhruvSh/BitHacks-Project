@@ -18,8 +18,8 @@ from kivy.uix.textinput import TextInput
 
 prediction = Use_Model.predictionMethods()
 
-plateNumber = prediction.returnDigits()
-#plateNumber = "00000001"
+#plateNumber = prediction.returnDigits()
+plateNumber = "00000001"
 imageName = ""
 
 
@@ -33,6 +33,8 @@ class CameraWindow(Screen):
         print("IMAGE: " + imageName)
         OpenCV_PlateFinder.scan_plate(imageName)
         print plateNumber
+        global plateNumber
+        plateNumber = prediction.returnDigits()
 
     pass
 
