@@ -85,9 +85,8 @@ def scan_plate(image_path):
     lpImg = get_plate(image_path)
     count = 0
     for image in lpImg:
-        path = "scans/cropped" + str(count) + ".jpg"
+        path = "croppedImgs/cropped" + str(count) + ".jpg"
         get_digits(path, count)
         count += 1
 
 scan_plate("PhotosToClean/download-4.jpg")
-        
