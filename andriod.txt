@@ -1,0 +1,3 @@
+title=Cop Reporter
+author=Dhruv Sharma
+orientation=portrait

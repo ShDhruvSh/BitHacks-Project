@@ -1,4 +1,4 @@
-import tensorflow as tf
+#import tensorflow as tf
 import itertools
 from kivy.app import App
 from kivy.lang import Builder
@@ -13,18 +13,18 @@ from kivy.uix.popup import Popup
 import time
 import json
 import os
-import OpenCV_PlateFinder
-import Use_Model
+#import OpenCV_PlateFinder
+#import Use_Model
 from kivy.uix.textinput import TextInput
 
-prediction = Use_Model.predictionMethods()
+#prediction = Use_Model.predictionMethods()
 
 #plateNumber = prediction.returnDigits()
-plateNumber = "00000001"
+plateNumber = "00000000"
 imageName = ""
 
 
-class CameraWindow(Screen):
+'''class CameraWindow(Screen):
     def onCameraClick(self, *args):
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
@@ -32,13 +32,13 @@ class CameraWindow(Screen):
         imageName = "IMG_" + timestr + ".png"
         camera.export_to_png(imageName)
         print("IMAGE: " + imageName)
-        OpenCV_PlateFinder.scan_plate(imageName)
+        #OpenCV_PlateFinder.scan_plate(imageName)
         global plateNumber
-        plateNumber = prediction.returnDigits()
+        #plateNumber = prediction.returnDigits()
         print(plateNumber)
 
     pass
-
+'''
 
 class ConfirmPhotoWindow(Screen):
     #plateNumber = "00000001"
@@ -132,22 +132,34 @@ class ConfirmPhotoWindow(Screen):
         plate_image = self.ids['plate-image']
         plate_image.source = ""
 
-    def isNewPlate(self):
+    def isNewPlate(self, plateNum):
         documentedPlateFlag = False
 
         with open("CopDictionary.json", 'r+') as file:
             data = json.load(file)
 
         for PlateNums in data:
-            if PlateNums == plateNumber:
+            if PlateNums == plateNum:
                 documentedPlateFlag = True
             else:
                 continue
 
         return not documentedPlateFlag
 
+    def changeThirdScreen(self):
+        self.manager.current = 'third'
+        self.manager.transition.direction = "left"
+    pass
+
+    def changeFourthScreen(self):
+        self.manager.current = 'fourth'
+        self.manager.transition.direction = "left"
+    pass
+
     def showPopup(self):
-        plateImage = self.ids['plate-image']
+        global plateNumber
+#        plateImage = plateNumber
+#        plateImage = self.ids['plate-image']
         plate0 = self.ids['plate0']
         plate1 = self.ids['plate1']
         plate2 = self.ids['plate2']
@@ -158,48 +170,62 @@ class ConfirmPhotoWindow(Screen):
         plate7 = self.ids['plate7']
         layout = FloatLayout()
 
-        popupLabel = Label(text="Error: Please click "
-                                "\n\"Verify Image\" before "
-                                "\nsubmitting photo!",
+        '''popupLabel = Label(text="Are you sure this is "
+                                "\nthe cop you wish "
+                                "\n to report?",
                            size_hint=(0.8, 1),
                            pos_hint={'x': 0.1, 'y': 0},
                            halign='center',
                            valign='middle',
                            text_size=self.size)
-        popupButton = Button(text="X",
+        popupX = Button(text="X",
                              background_normal='',
                              background_color=(1, 0, 0, 1),
                              size_hint=(0.1, 0.05),
                              pos_hint={'x': 0.9, 'y': 0.9},
                              font_size=12)
 
+        popupButton = Button(text="Yes",
+                             background_normal='',
+                             background_color=(1, 0, 0, 1),
+                             size_hint=(0.5, 0.2),
+                             pos_hint={'x': 0.5, 'y': 0.1},
+                             font_size=30)
+
         layout.add_widget(popupLabel)
+        layout.add_widget(popupX)
         layout.add_widget(popupButton)
 
-        popupWindow = Popup(title="ERROR: VERIFY IMAGE",
+        popupWindow = Popup(title="VERIFY SUBMISSION",
                             # "ERROR 404 YOUR COMPUTER IS CORRUPTED INSTALL ANTIVIRUS IMMEDIATELY",
                             content=layout,
-                            size_hint=(None, None),
-                            size=(250, 250))
+                            size_hint=(0.5, 0.5),
+                            pos_hint={'x': 0.5, 'y': 0.5})
+
+        popupX.bind(on_press=popupWindow.dismiss)
         popupButton.bind(on_press=popupWindow.dismiss)
+        popupButton.bind(on_release=popupWindow.dismiss)
 
-        if len(str(plateImage.source)) > 0:
-            if self.isNewPlate():
-                self.parent.current = "third"
-            else:
-                self.parent.current = "fourth"
-            self.replaceImage()
-#            self.plateNumber =
-            global plateNumber
-            plateNumber = plate0.text + plate1.text + plate2.text + plate3.text + plate4.text + \
-                               plate5.text + plate6.text + plate7.text
-            print (plateNumber)
 
+
+        popupWindow.open()'''
+
+        plateNumber = plate0.text + plate1.text + plate2.text + plate3.text + plate4.text + \
+                            plate5.text + plate6.text + plate7.text
+        print (plateNumber)
+
+#        if len(str(plateImage.source)) > 0:
+        if self.isNewPlate(plateNumber):
+            self.changeThirdScreen()
         else:
-            self.parent.current = "second"
-            self.replaceImage()
-            popupWindow.open()
+            self.changeFourthScreen()
+#        self.replaceImage()
 
+
+#        else:
+#            self.parent.current = "second"
+#            self.replaceImage()
+#            popupWindow.open()
     pass
 
 
@@ -225,6 +251,7 @@ class EnterInfoWindow(Screen):
 
         if nameLabel.text != "Input name here" and idLabel.text != "Input badge number here" \
                 and nameLabel.text!= "" and idLabel.text != "":
+            self.manager.transition.direction = "left"
             self.parent.current = "fourth"
             self.addNewInfo(nameLabel.text, idLabel.text)
             nameLabel.text = "Input name here"
@@ -254,6 +281,55 @@ class EnterInfoWindow(Screen):
             # json.dump(data, file)
 
     pass
+
+    def changeSecondScreen(self):
+        self.manager.current = 'second'
+    pass
+
+    def showPopup(self):
+        layout = FloatLayout()
+
+        popupLabel = Label(text="Are you sure you "
+                                "\nwant to cancel "
+                                "\n your report?",
+                           size_hint=(0.8, 1),
+                           pos_hint={'x': 0.1, 'y': 0},
+                           halign='center',
+                           valign='middle',
+                           text_size=self.size)
+        popupX = Button(text="X",
+                        background_normal='',
+                        background_color=(1, 0, 0, 1),
+                        size_hint=(0.1, 0.05),
+                        pos_hint={'x': 0.9, 'y': 0.9},
+                        font_size=12)
+
+        popupButton = Button(text="Yes",
+                             background_normal='',
+                             background_color=(1, 0, 0, 1),
+                             size_hint=(0.5, 0.2),
+                             pos_hint={'x': 0.5, 'y': 0.1},
+                             font_size=30)
+
+        layout.add_widget(popupLabel)
+        layout.add_widget(popupX)
+        layout.add_widget(popupButton)
+
+        popupWindow = Popup(title="Cancel Report",
+                            # "ERROR 404 YOUR COMPUTER IS CORRUPTED INSTALL ANTIVIRUS IMMEDIATELY",
+                            content=layout,
+                            size_hint=(0.5, 0.5),
+                            pos_hint={'x': 0.5, 'y': 0.5})
+
+        popupX.bind(on_press=popupWindow.dismiss)
+        popupButton.bind(on_press=popupWindow.dismiss)
+        popupButton.bind(on_release=lambda x:self.changeSecondScreen())
+        popupButton.bind(on_release=popupWindow.dismiss)
+
+        popupWindow.open()
+
+    pass
+
 
 
 class InfoWindow(Screen):
