@@ -1,5 +1,5 @@
-import tensorflow as tf
-import itertools
+#import tensorflow as tf
+#import itertools
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import NumericProperty
@@ -13,11 +13,11 @@ from kivy.uix.popup import Popup
 import time
 import json
 import os
-import OpenCV_PlateFinder
-import Use_Model
+#import OpenCV_PlateFinder
+#import Use_Model
 from kivy.uix.textinput import TextInput
 
-prediction = Use_Model.predictionMethods()
+#prediction = Use_Model.predictionMethods()
 
 #plateNumber = prediction.returnDigits()
 plateNumber = "00000001"
@@ -32,9 +32,9 @@ class CameraWindow(Screen):
         imageName = "IMG_" + timestr + ".png"
         camera.export_to_png(imageName)
         print("IMAGE: " + imageName)
-        OpenCV_PlateFinder.scan_plate(imageName)
+        #OpenCV_PlateFinder.scan_plate(imageName)
         global plateNumber
-        plateNumber = prediction.returnDigits()
+        #plateNumber = prediction.returnDigits()
         print(plateNumber)
 
     pass
@@ -184,16 +184,16 @@ class ConfirmPhotoWindow(Screen):
         popupButton.bind(on_press=popupWindow.dismiss)
 
         if len(str(plateImage.source)) > 0:
+            global plateNumber
+            plateNumber = plate0.text + plate1.text + plate2.text + plate3.text + plate4.text + \
+                          plate5.text + plate6.text + plate7.text
+            print(plateNumber)
             if self.isNewPlate():
                 self.parent.current = "third"
             else:
                 self.parent.current = "fourth"
             self.replaceImage()
 #            self.plateNumber =
-            global plateNumber
-            plateNumber = plate0.text + plate1.text + plate2.text + plate3.text + plate4.text + \
-                               plate5.text + plate6.text + plate7.text
-            print (plateNumber)
 
         else:
             self.parent.current = "second"
