@@ -1,4 +1,5 @@
-import tensorflow as tf
+#import tensorflow as tf
+import tflite_runtime.interpreter as tflite
 import keras
 import struct
 import random
@@ -116,7 +117,7 @@ def trainWithBetterData(): # This is now worthless to me ;(
 '''
 
 img_width, img_height = 150, 150
-train_data_dir = '/Users/jakewriter/PycharmProjects/BitHacks-project/PlateCharData'
+train_data_dir = '/PlateCharData'
 catagories = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13',
               '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27',
               '28', '29', '30', '31', '32', '33', '34', '35']

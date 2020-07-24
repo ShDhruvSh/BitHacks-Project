@@ -93,4 +93,4 @@ def scan_plate(image_path):
         get_digits(path, count)
         count += 1
 
-scan_plate("PhotosToClean/download-4.jpg")
+#scan_plate("PhotosToClean/download-4.jpg")

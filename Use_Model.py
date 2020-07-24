@@ -1,4 +1,5 @@
-import tensorflow as tf
+import tflite_runtime.interpreter as tflite
+#import tensorflow as tf
 from keras.models import load_model
 from keras.models import Sequential
 from keras.layers import Dense
